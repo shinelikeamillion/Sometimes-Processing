@@ -8,3 +8,10 @@ void draw(){
   if(mousePressed)
   line(pmouseX, pmouseY, mouseX, mouseY);
 }
+
+void mousePressed() {
+  println("mousePressed");
+}
+void keyPressed(){
+  background(255);
+}
