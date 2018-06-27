@@ -11,7 +11,7 @@ void draw() {
   translate(mouseX, mouseY);
   drawZoog();
 }
-  
+
 void drawZoog() {
   drawHead(0, 0 - 30);
   drawEyes(0, 0 - 30);
@@ -26,8 +26,8 @@ void drawHead(int x, int y) {
 
 void drawEyes(int x, int y) {
   // Eyes
-  fill(mouseX/2, 0, mouseY/2); 
-  ellipse(x - 15, y, 16, 32); 
+  fill(mouseX/2, 0, mouseY/2);
+  ellipse(x - 15, y, 16, 32);
   ellipse(x + 15, y, 16, 32);
 }
 
