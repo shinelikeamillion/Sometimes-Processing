@@ -7,15 +7,16 @@ void setup(){
 
 void draw() {
   background(255);
-  if(mouseX * mouseY != 0)
+  // Draw everything relative to (mouseX, mouseY)
+  translate(mouseX, mouseY);
   drawZoog();
 }
   
 void drawZoog() {
-  drawHead(mouseX, mouseY - 30);
-  drawEyes(mouseX, mouseY - 30);
-  drawBody(mouseX, mouseY + 25);
-  drawLegs(mouseX, mouseY + 50);
+  drawHead(0, 0 - 30);
+  drawEyes(0, 0 - 30);
+  drawBody(0, 0 + 25);
+  drawLegs(0, 0 + 50);
 }
 void drawHead(int x, int y) {
   // Head
@@ -40,6 +41,6 @@ void drawBody(int x, int y){
 void drawLegs(int x, int y) {
   // Legs
   stroke(0);
-  line(x - 10, y, pmouseX - 10, pmouseY + 60);
-  line(x + 10, y, pmouseX + 10, pmouseY + 60);
+  line(x - 10, y, x - 20, y + 20);
+  line(x + 10, y, x + 20, y + 20);
 }

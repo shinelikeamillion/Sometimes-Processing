@@ -4,11 +4,11 @@ void setup() {
 
 void draw() {
   background(255);
-  
+
   // Set ellipses and rects to CENTER mode
   ellipseMode(CENTER);
   rectMode(CENTER);
-  
+
   drawHead(mouseX, mouseY-30);
   drawEyes();
   drawBody(mouseX, mouseY+25);
@@ -37,7 +37,7 @@ void drawLegs() {
 
 void drawEyes() {
   // Eyes
-  fill(0); 
-  ellipse(221, 115, 16, 32); 
+  fill(0);
+  ellipse(221, 115, 16, 32);
   ellipse(259, 115, 16, 32);
 }
