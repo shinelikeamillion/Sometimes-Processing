@@ -9,7 +9,7 @@ void setup(){
   size(800, 600);
   ellipseMode(CENTER);
   rectMode(CENTER);
-  frameRate(10);
+  frameRate(10); // make flash
 }
 
 void draw() {
