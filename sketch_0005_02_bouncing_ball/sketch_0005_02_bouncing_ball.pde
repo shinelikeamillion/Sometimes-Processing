@@ -1,3 +1,10 @@
+
+// speed = speedX + speedY;  
+    //k = (mouseX - x) / (mouseY - y);
+    //speedX= (float)Math.sqrt(Math.pow(speed, 2)/(float)(1 + Math.pow(k, 2)));
+    //speedX = (mouseX - x) > 0 ? speedX : -speedX;
+    //speedY = speedX * k;
+
 void setup(){
   size(800, 600);
   background(255);
@@ -6,18 +13,11 @@ void setup(){
 int radius = 20;
 float x = radius;
 float y = radius;
-float k;
-int speed = 5;
-float speedX;
-float speedY;
+float speedX = 5;
+float speedY = 5;
 void draw() {
   
   ellipse(x, y, 2*radius , 2*radius);
-  
-  k = (mouseX - x) / (mouseY - y);
-  speedX= (float)Math.sqrt(Math.pow(speed, 2)/(float)(1 + Math.pow(k, 2)));
-  speedX = (mouseX - x) > 0 ? speedX : -speedX;
-  speedY = speedX * k;
   
   x = x + speedX;
   y = y + speedY;
