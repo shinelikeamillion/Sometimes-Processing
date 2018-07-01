@@ -14,3 +14,4 @@
 * keyPressed() 按键
 * translate() 设置此位置为所有绘制的相对位置
 * rect/ellipseMode(CENTER) 设置绘制模式
+* color() 取一个颜色
