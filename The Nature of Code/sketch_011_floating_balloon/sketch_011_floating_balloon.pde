@@ -13,16 +13,14 @@ void setup() {
   mover.applyForce(floatForce);
 }
 
-
+float seed = 0.01;
 void draw() {
   background(255);
   
+  if(mousePressed) {
+    seed+=0.01;
+    PVector wind = new PVector(map(noise(seed), 0, 1, -0.05, 0.05), 0);
+    mover.applyForce(wind);
+  }
   mover.move();
-}
-
-  float seed = 0.01;
-void mousePressed () {
-  seed+=0.01;
-  PVector wind = new PVector(map(noise(seed), 0, 1, -0.05, 0.05), 0);
-  mover.applyForce(wind);
 }
