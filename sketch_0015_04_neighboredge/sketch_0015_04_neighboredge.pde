@@ -1,3 +1,4 @@
+
 PImage img;
 PImage destination;
 float threshold = 120;
