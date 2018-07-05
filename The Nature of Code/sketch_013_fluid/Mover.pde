@@ -1,11 +1,12 @@
 class Mover {
-  
   PVector location;
   PVector velocity;
   PVector acceleration;
   int topspeed = 10;
   float mass = 1.0;
   float radius = 13;
+  
+  float normal = 1;
   
   Mover(float w, float h) {
     location = new PVector(w, h);
@@ -17,6 +18,18 @@ class Mover {
   void setRadius(float radius) {
     this.radius = radius;
     mass = radius/10;
+  }
+  
+  void addFriction (float u) {
+    PVector friction = velocity.copy().normalize().mult(-1).mult(u*normal);
+    applyForce(friction);
+  }
+  
+  void addDrag (Fluid fluid) {
+    float speed = velocity.mag();
+    float dragMagnitude = fluid.c * speed * speed;
+    PVector drag = velocity.copy().normalize().mult(-1).mult(dragMagnitude);
+    applyForce(drag);
   }
   
   void move() {
@@ -37,6 +50,7 @@ class Mover {
   }
   
   void display() {
+    fill(0);
     ellipse(location.x, location.y, 2*radius, 2*radius);
   }
   

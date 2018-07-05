@@ -24,6 +24,7 @@ void draw() {
   for (Mover mover : movers) {
     mover.applyForce(gravity);
     mover.applyForce(wind);
+    mover.addFriction(0.01);
     mover.move();
   }
 }

@@ -1,5 +1,6 @@
 
 Mover[] movers;
+Fluid fluid;
 PVector gravity = new PVector(0, 0.1);
 PVector wind = new PVector(0.01, 0);
 void setup() {
@@ -9,6 +10,8 @@ void setup() {
   noStroke();
   fill(0);
   smooth();
+  
+  fluid = new Fluid(width/2, height/2, 200, 200);
   
   movers = new Mover[10];
   for(int i = 0; i < movers.length; i++) {
@@ -21,9 +24,17 @@ void setup() {
 void draw() {
   background(255);
   
+  fluid.display();
+  
   for (Mover mover : movers) {
+    
     mover.applyForce(gravity);
     mover.applyForce(wind);
+    if(fluid.isInsided(mover)) {
+      mover.addDrag(fluid);
+    } else {
+      mover.addFriction(0.01);
+    }
     mover.move();
   }
 }

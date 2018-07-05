@@ -7,6 +7,8 @@ class Mover {
   float mass = 1.0;
   float radius = 13;
   
+  float normal = 1;
+  
   Mover(float w, float h) {
     location = new PVector(w, h);
     acceleration = new PVector(0, 0);
@@ -17,6 +19,13 @@ class Mover {
   void setRadius(float radius) {
     this.radius = radius;
     mass = radius/10;
+  }
+  
+  void addFriction (float u) {
+    PVector friction = velocity.copy().normalize();
+    friction.mult(-1);
+    friction.mult(u*normal);
+    applyForce(friction);
   }
   
   void move() {
