@@ -1,41 +1,59 @@
 
-PImage img;       // The source image
-int cellsize = 2; // Dimensions of each cell in the grid
-int cols, rows;   // Number of columns and rows in our system
-float theta = 0.0;
+PImage img;
+int cellsize = 40;
+int cols, rows; 
+float thetaX = 0.0;
+float thetaY = 0.0;
+
+float maxBri;
+
 void setup() {
-  size(490, 490, P3D);
-  img = loadImage("pig.jpg"); // Load the image
-  cols = width/cellsize;              // Calculate # of columns
-  rows = height/cellsize;             // Calculate # of rows
+  size(800, 600, P3D);
+  img = loadImage("pig.jpg"); 
+  cols = img.width/cellsize;
+  rows = img.height/cellsize;
+  
+  img.loadPixels();
+  maxBri = img.pixels[0];
 }
 
 void draw() {
   
   background(255);
-  img.loadPixels();
   
-  translate(width/2, height/2);
-  rotateX(theta+=0.01);
+  translate(width/2, height/2, 0);
+  if(mouseX != 0 && mouseY != 0) {
+    thetaX = map(mouseX - width/2, - width/2, width/2, HALF_PI, -HALF_PI);
+    thetaY = map(mouseY - height/2, - height/2, height/2, -HALF_PI, HALF_PI);
+    rotateY(thetaX);
+    rotateX(thetaY);
+  }
 
-  // Begin loop for columns
   for (int i = 0; i < cols; i++ ) {
     // Begin loop for rows
     for (int j = 0; j < rows; j++ ) {
-      int x = i*cellsize + cellsize/2; // x position
-      int y = j*cellsize + cellsize/2; // y position
-      int loc = x + y*width;           // Pixel array location
-      color c = img.pixels[loc];       // Grab the color
-      // Map brightness to a z position as a function of mouseX
-      float z = map(brightness(img.pixels[loc]), 0, 255, 0, mouseX);
+      int x = i*cellsize + cellsize/2;
+      int y = j*cellsize + cellsize/2;
+      int loc = x + y*img.width;
+      color c = img.pixels[loc];
+      
+      if(brightness(c) > maxBri) maxBri = brightness(c);
+      
+      float z = brightness(c) - maxBri;
       // Translate to the location, set fill and stroke, and draw the rect
       pushMatrix();
       translate(x, y, z); 
       fill(c);
       noStroke();
       rectMode(CENTER);
-      rect(0 - width/2, 0 - height/2, cellsize, cellsize);
+      rect(0 - img.width/2, 0 - img.height/2, cellsize, cellsize);
       popMatrix();
     }
   }
+}
+
+void mousePressed() {
+  cellsize -= 2;
+  cellsize = constrain(cellsize, 5, 40);
+  setup();
 }
