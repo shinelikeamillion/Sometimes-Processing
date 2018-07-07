@@ -19,5 +19,6 @@ void draw() {
     // The array of ints is used to set the color and height of each rectangle.
     fill(data[i]); 
     rect(i*64, 0, 20, data[i]);
+    println(data[i]);
   }
 }
