@@ -7,6 +7,7 @@ var totalTime = 3000;
 var index = 0;
 var textSize = 0;
 var stop = false;
+var textColor = 255;
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
@@ -26,21 +27,22 @@ function setup() {
     textSize(windowHeight/2);
     textFont("Arial");
     noStroke();
-    fill(255);
     textAlign(CENTER, CENTER);
     notes[index].play();
 }
 
 function draw() {
     background(0);
-    var passedTime = millis() - savedTime;
+    fill(constrain(textColor, 0, 255));
     text(singleNotes[index], width/2, height/2);
-    if(stop) return;
-    if (passedTime > totalTime) {
+    if (!stop && millis() - savedTime > totalTime) {
         
+        textColor = 255;
         index = int(random(singleNotes.length));
         notes[index].play();
         savedTime = millis();
+    } else if (!stop) {
+        textColor -= 2;
     }
 }
 
