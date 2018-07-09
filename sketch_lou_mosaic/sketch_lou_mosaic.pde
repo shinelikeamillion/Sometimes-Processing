@@ -2,10 +2,10 @@
 // in my own way
 PImage img;
 float Rmax = 5;
-float gap = 1;
+float gap = 2;
 
 float hexDis = Rmax * cos(PI/6);
-float distanceX = (2*hexDis+gap)*cos(PI/6);
+float distanceX = int(2*hexDis+gap)*cos(PI/6);
 float distanceY = (2*hexDis+gap)*sin(PI/6);
 
 float cols, rows;
@@ -34,8 +34,7 @@ void setup(){
       loc = constrain(loc,0,img.pixels.length-1);
       color c = color(red(img.pixels[loc]), green(img.pixels[loc]), blue(img.pixels[loc]));
       
-      //if(brightness(c) < 255)
-      println(x+"----"+y+";");
+      if(brightness(c) < 255)
       drawHex(x, y, Rmax, c);
     }
   }
@@ -57,5 +56,5 @@ void drawHex(float x, float y, float r, color c) {
 
 void draw(){}
 void mousePressed(){
-  save("lou.png");
+ save("lou"+mouseX+".png");
 }
