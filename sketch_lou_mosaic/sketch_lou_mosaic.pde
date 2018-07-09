@@ -1,8 +1,8 @@
 // implement : https://www.zhihu.com/question/47842081/answer/108015475
 // in my own way
 PImage img;
-float Rmax = 60;
-float gap = 2;
+float Rmax = 5;
+float gap = 1;
 
 float hexDis = Rmax * cos(PI/6);
 float distanceX = (2*hexDis+gap)*cos(PI/6);
@@ -15,7 +15,7 @@ void settings(){
   size(img.width, img.height);
   
   cols = width/distanceX;
-  rows = height/(2*hexDis+gap);
+  rows = height/(2*distanceY);
 }
 
 void setup(){
@@ -27,23 +27,22 @@ void setup(){
   println(cols+"=="+rows);
   for(int xi = 0; xi <= cols; xi++) {
     for(int yi = 0; yi <= rows; yi++) {
-      float x = xi*distanceX;
-      float y = xi % 2 == 0 ? 2*yi*distanceY : (yi+0.5)*distanceY;
+      int x = int(xi*distanceX);
+      int y = int(xi % 2 == 0 ? 2*yi*distanceY : (2*yi+1)*distanceY);
       
-      float loc = x + y * img.width;
+      int loc = x + y * img.width;
       loc = constrain(loc,0,img.pixels.length-1);
-      color c = color(red(img.pixels[(int)loc]), green(img.pixels[(int)loc]), blue(img.pixels[(int)loc]));
+      color c = color(red(img.pixels[loc]), green(img.pixels[loc]), blue(img.pixels[loc]));
       
       //if(brightness(c) < 255)
       println(x+"----"+y+";");
       drawHex(x, y, Rmax, c);
     }
   }
-  noLoop();
 }
 
 void drawHex(float x, float y, float r, color c) {
-  stroke(0);
+  noStroke();
   fill(c);
   pushMatrix();
   translate(x, y);
@@ -57,4 +56,6 @@ void drawHex(float x, float y, float r, color c) {
 }
 
 void draw(){}
-void mousePressed(){}
+void mousePressed(){
+  save("lou.png");
+}
