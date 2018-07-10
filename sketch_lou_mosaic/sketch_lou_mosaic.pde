@@ -44,14 +44,14 @@ void setup(){
       
       int imgX = (int)map(x, 0, mosaicSize[0], 0, img.width);
       int imgY = (int)map(y, 0, mosaicSize[1], 0, img.height);
-      int loc = imgX + imgY * img.width;
-      loc = constrain(loc,0,img.pixels.length-1);
-      color c = color(red(img.pixels[loc]), green(img.pixels[loc]), blue(img.pixels[loc]));
+      
+      color c = convolution(imgX, imgY, 3, img);
       
       if(brightness(c) < 255)
       drawHex(x - mosaicSize[0]/2, y - mosaicSize[1]/2, Rmax, c);
     }
   }
+  noLoop();
 }
 
 void drawHex(float x, float y, float r, color c) {
@@ -66,6 +66,31 @@ void drawHex(float x, float y, float r, color c) {
   }
   endShape(CLOSE);
   popMatrix();
+}
+
+color convolution (int x, int y, int matrixSize, PImage img) {
+  float rtotal = 0;
+  float gtotal = 0;
+  float btotal = 0;
+  
+  int offset = matrixSize / 2;
+  for(int i = 0; i < matrixSize; i++) {
+    for(int j = 0; j < matrixSize; j++) {
+      int xloc = x+i-offset;
+      int yloc = y+j-offset;
+      int loc = constrain(xloc + yloc * img.width, 0, img.pixels.length-1);
+      
+      rtotal += (red(img.pixels[loc]) / pow(matrixSize, 2));
+      gtotal += (green(img.pixels[loc]) / pow(matrixSize, 2));
+      btotal += (blue(img.pixels[loc]) / pow(matrixSize, 2));
+    }
+  }
+  
+  rtotal = constrain(rtotal, 0, 255);
+  gtotal = constrain(gtotal, 0, 255);
+  btotal = constrain(btotal, 0, 255);
+  
+  return color(rtotal, gtotal, btotal);
 }
 
 void draw(){}
