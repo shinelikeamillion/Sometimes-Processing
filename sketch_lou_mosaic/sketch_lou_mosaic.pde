@@ -46,9 +46,14 @@ void setup(){
       int imgY = (int)map(y, 0, mosaicSize[1], 0, img.height);
       
       color c = convolution(imgX, imgY, 3, img);
-      
-      if(brightness(c) < 255)
-      drawHex(x - mosaicSize[0]/2, y - mosaicSize[1]/2, Rmax, c);
+      float b = brightness(c);
+      float r;
+      if(b < 200) {
+        r = Rmax;
+      } else {
+        r = map(b, 200, 255, Rmax, 0);
+      }
+      if (r > 0) drawHex(x - mosaicSize[0]/2, y - mosaicSize[1]/2, r, c);
     }
   }
   noLoop();
