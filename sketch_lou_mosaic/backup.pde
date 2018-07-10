@@ -1,57 +1,60 @@
-//// https://www.zhihu.com/question/47842081/answer/108015475
-//// modified a little bit
+// https://www.zhihu.com/question/47842081/answer/108015475
+
 //PImage img;
-//float Rmax = 4;
-//float gap = 1;
-
-//float hexDis = Rmax;
-//float distanceX = (2*hexDis+gap)*cos(PI/6);
-//float distanceY = (2*hexDis+gap)*sin(PI/6);
-
-//float cols, rows;
+//float Rmax = 10;
+//float gap = 2;
+//float dx = (2*Rmax+gap)*cos(PI/6);
+//float dy = (2*Rmax+gap)/2;
 
 //void settings(){
-//  img = loadImage("lou.jpg");
-//  size(img.width, img.height);
-  
-//  cols = width/distanceX;
-//  rows = height/(distanceY);
+//  img = loadImage("AH.jpg");
+//  size(img.width,img.height);
 //}
-
 //void setup(){
-//  background(255);
 //  img.loadPixels();
+
+//  //background(255);
 //  smooth(8);
+
 //  colorMode(RGB);
-  
-//  println(cols+"=="+rows);
-//  for(int xi = 0; xi <= cols; xi++) {
-//    for(int yi = 0; yi <= rows; yi++) {
-//      int x = int(xi*distanceX);
-//      int y = int(yi*distanceY);
-      
+//  background(255);
+//  int x,y;
+//  color c;
+//  float r;
+
+//  for(int xi=0; xi<=width/dx; xi++){
+//    for(int yi=0; yi<=height/dy; yi++){
+
+//      x = int(xi*dx);
+//      y = int(yi*dy);
 //      if (int(xi+yi)%2!=0){
-//        color c = convolution(x, y, 3, img);
-      
-//        if(brightness(c) < 255)
-//        drawHex(x, y, Rmax, c);
+//        int loc = x+y*img.width;
+//        loc = constrain(loc,0,img.pixels.length-1);
+//        c = convolution(x,y,3,img);
+//        if (brightness(c)>200)
+//          r = map(brightness(c),200,255,Rmax,0);
+//        else
+//          r = Rmax;
+
+//        draw_hex(x,y,r,c);
 //      }
-      
-      
 //    }
 //  }
-//}
 
-//void drawHex(float x, float y, float r, color c) {
+//}
+//void draw_hex(float x, float y, float r, color c){
+//  float Sr = r/cos(PI/6);
 //  noStroke();
 //  fill(c);
 //  pushMatrix();
-//  translate(x, y);
+//  translate(x,y);
 //  beginShape();
-//  for(int i = 0; i < 6; i++) {
-//    float theta = i*(TWO_PI/6);
-//    vertex(r*cos(theta), r*sin(theta));
-//  }
+//  vertex(Sr,0);
+//  vertex(Sr*cos(PI/3), Sr*sin(PI/3));
+//  vertex(Sr*cos(PI/3*2), Sr*sin(PI/3*2));
+//  vertex(Sr*cos(PI), Sr*sin(PI));
+//  vertex(Sr*cos(PI/3*4),Sr*sin(PI/3*4));
+//  vertex(Sr*cos(PI/3*5),Sr*sin(PI/3*5));
 //  endShape(CLOSE);
 //  popMatrix();
 //}
@@ -85,8 +88,7 @@
 
 //  return color(rtotal,gtotal,btotal);
 //}
-
 //void draw(){}
-//void mousePressed(){
-//  save("lou"+mouseX+".png");
+//void keyPressed(){
+//  save("hexagon.png");
 //}

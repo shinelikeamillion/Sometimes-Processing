@@ -1,14 +1,14 @@
 // implement : https://www.zhihu.com/question/47842081/answer/108015475
 // in my own way
 PImage img;
-float Rmax = 5;
-float gap = 2;
+int Rmax = 5;
+int gap = 2;
 
 float hexDis = Rmax * cos(PI/6);
-float distanceX = int(2*hexDis+gap)*cos(PI/6);
-float distanceY = (2*hexDis+gap)*sin(PI/6);
+int distanceX = int((2*hexDis+gap)*cos(PI/6));
+int distanceY = int((2*hexDis+gap)*sin(PI/6));
 
-float cols, rows;
+int cols, rows;
 
 void settings(){
   img = loadImage("lou.jpg");
@@ -24,7 +24,6 @@ void setup(){
   smooth(8);
   colorMode(RGB);
   
-  println(cols+"=="+rows);
   for(int xi = 0; xi <= cols; xi++) {
     for(int yi = 0; yi <= rows; yi++) {
       int x = int(xi*distanceX);
