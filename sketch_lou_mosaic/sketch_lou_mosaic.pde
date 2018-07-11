@@ -53,7 +53,7 @@ void setup(){
       } else {
         r = map(b, 200, 255, Rmax, 0);
       }
-      if (r > 0) drawHex(x - mosaicSize[0]/2, y - mosaicSize[1]/2, r, c);
+      if (r > 1) drawHex(x - mosaicSize[0]/2, y - mosaicSize[1]/2, r, c);
     }
   }
   noLoop();

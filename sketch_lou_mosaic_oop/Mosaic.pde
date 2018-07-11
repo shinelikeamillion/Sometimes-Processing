@@ -61,7 +61,7 @@ class Mosaic {
         } else {
           r = map(b, 200, 255, rMax, 0);
         }
-        if (r > 0) points.add(new Point(x, y, r, c));
+        if (r > 1) points.add(new Point(x, y, r, c));
       }
     }    
   }
