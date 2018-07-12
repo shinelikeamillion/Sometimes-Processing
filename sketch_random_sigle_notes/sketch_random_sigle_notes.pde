@@ -1,8 +1,9 @@
 PFont f;
 String[] singleNotes = {"A","B","C","D","E","F","G"};
+int[] indexs= {6,7,1,2,3,4,5};
 int savedTime = 0;
 int totalTime = 2000;
-String note;
+int index;
 
 void setup() {
   size(800, 600);
@@ -16,9 +17,13 @@ void setup() {
 void draw() {
   background(255);
   
+  
   if(millis() - savedTime > totalTime) {
-    note = singleNotes[(int)random(singleNotes.length)];
+    index = (int)random(singleNotes.length);
     savedTime = millis();
   }
-  text(note, width/2, height/2);
+  textFont(f, height/2);
+  text(singleNotes[index], width/2, height/2);
+  textFont(f, height/4);
+  text(indexs[index], width - 300, height/2+100);
 }
