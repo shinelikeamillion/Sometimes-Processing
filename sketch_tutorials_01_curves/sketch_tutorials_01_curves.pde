@@ -6,26 +6,32 @@ x1, y1      Coordinates of the curve’s starting point
 x2, y2      Coordinates of the curve’s ending point
 cpx2, cpy2  Coordinates of the second control point
 */
-
+Point cp1, cp2, p1, p2;
 void setup () {
   size(200, 200);
-  background(255);
   smooth();
   
-  noStroke();
   // control point1
-  fill(255, 0, 0);
-  ellipse(40, 40, 3, 3);
+  cp1 = new Point(40, 40, true);
   
   // point1
-  fill(0, 0, 255);
-  ellipse(80, 60, 3, 3);
+  p1 = new Point(80, 60, false);
   
   // control point2
-  fill(255, 0, 0);
-  ellipse(60, 120, 3, 3);
+  cp2 = new Point(60, 120, true);
   
   // point2
-  fill(0, 0, 255);
-  ellipse(100, 100, 3, 3);
+  p2 = new Point(100, 100, false);
+}
+
+void draw () {
+  background(255);
+  cp1.display();
+  p1.display();
+  cp2.display();
+  p2.display();
+  
+  stroke(0);
+  noFill();
+  curve(cp1.x, cp1.y, p1.x, p1.y, p2.x, p2.y, cp2.x, cp2.y);
 }
