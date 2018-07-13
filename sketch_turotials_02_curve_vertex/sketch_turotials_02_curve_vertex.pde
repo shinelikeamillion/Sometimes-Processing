@@ -9,11 +9,14 @@ void setup() {
   stroke(0);
   
   beginShape();
+  // the first control point
   curveVertex(40, 40);
+  // the start point of curve
   curveVertex(40, 40);
   curveVertex(80, 60);
   curveVertex(100, 100);
   curveVertex(60, 120);
+  // the last point of curve
   curveVertex(50, 150);
   curveVertex(50, 150);
   endShape();
