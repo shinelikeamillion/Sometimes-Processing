@@ -26,8 +26,8 @@ void draw() {
   translate(width/2, height/2);
   ellipse(0, 0, r, r);
   
-  thetaR = thetaR+0.1 % TWO_PI;
-  thetaC = thetaC-0.16 % TWO_PI;
+  thetaR = thetaR+0.153 % TWO_PI;
+  thetaC = thetaC-0.135 % TWO_PI;
   
   float xR = r*cos(thetaR)/2;
   float yR = r*sin(thetaR)/2;
