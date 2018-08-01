@@ -8,7 +8,7 @@ void setup() {
 }
 
 void draw() {
-  background(255);
+  background(0);
   
   PVector f = a.attract(m);
   m.applyForce(f);

@@ -11,7 +11,7 @@ class Mover {
   
   Mover(float w, float h) {
     location = new PVector(w, h);
-    acceleration = new PVector(0, 0);
+    acceleration = new PVector(1, 0);
     velocity = new PVector(0, 0);
     velocity.limit(topspeed);
   }
@@ -21,18 +21,11 @@ class Mover {
     mass = radius/10;
   }
   
-  void addFriction (float u) {
-    PVector friction = velocity.copy().normalize();
-    friction.mult(-1);
-    friction.mult(u*normal);
-    applyForce(friction);
-  }
-  
   void move() {
     
     velocity.add(acceleration);
     location.add(velocity);
-    checkEdges();
+    //checkEdges(); // no need to checkedges
     acceleration.mult(0);
     display();
   }
@@ -46,6 +39,7 @@ class Mover {
   }
   
   void display() {
+    fill(175);
     ellipse(location.x, location.y, 2*radius, 2*radius);
   }
   
