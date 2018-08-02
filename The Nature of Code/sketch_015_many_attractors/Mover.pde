@@ -8,9 +8,9 @@ class Mover {
   float radius = 13;
   
   float normal = 1;
+  float G = 1;
   
-  Mover(float w, float h, float mass) {
-    this.mass = mass;
+  Mover(float w, float h) {
     location = new PVector(w, h);
     acceleration = new PVector(1, 0);
     velocity = new PVector(0, 0);

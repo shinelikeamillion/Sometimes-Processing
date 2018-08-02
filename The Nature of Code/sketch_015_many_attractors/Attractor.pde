@@ -5,7 +5,7 @@ class Attractor{
   
   Attractor() {
     location = new PVector(width/2, height/2);
-    mass = 20;
+    mass = 30;
   }
   
   void display() {
