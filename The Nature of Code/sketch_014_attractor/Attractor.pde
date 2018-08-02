@@ -9,7 +9,7 @@ class Attractor{
   }
   
   void display() {
-    noStroke();
+    fill(255);
     ellipse(location.x, location.y, mass*2, mass*2);
   }
   
