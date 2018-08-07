@@ -24,6 +24,6 @@ void draw() {
   }
   textFont(f, height/2);
   text(singleNotes[index], width/2, height/2);
-  textFont(f, height/4);
-  text(indexs[index], width - 300, height/2+100);
+  textFont(f, height/5);
+  text(indexs[index], width - 250, height/2+100);
 }
