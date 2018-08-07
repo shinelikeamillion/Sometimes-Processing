@@ -13,11 +13,12 @@
 * frameRate() 刷新帧率 对应 参数 frameCount
 * keyPressed() 按键
 * translate() 设置此位置为所有绘制的相对位置
+* dist() 两点距离
 * rect/ellipseMode(CENTER) 设置绘制模式
 * color() 取一个颜色
 * sin() cos() tan() 三角函数
 * atan() 反正切
-* atan() 方向向量的反正切，求角
+* atan2() 方向向量的反正切，求角
 * heading2D() PVector 内部调用 atan2() 获取任何向量的弧度
 * 上面 heading2D() 已经过期，heading() 取代
 * PVector.copy() 获取向量的副本
