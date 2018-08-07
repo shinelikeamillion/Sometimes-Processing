@@ -19,5 +19,7 @@
 * atan() 反正切
 * atan() 方向向量的反正切，求角
 * heading2D() PVector 内部调用 atan2() 获取任何向量的弧度
+* 上面 heading2D() 已经过期，heading() 取代
+* PVector.copy() 获取向量的副本
 * PVector.random2D() 随机一个向量
 
