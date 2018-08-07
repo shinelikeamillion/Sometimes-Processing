@@ -1,10 +1,12 @@
-float theta = 0;
 void setup(){
   size(800, 200);
 }
 
 void draw(){
-  float x = sin(theta)*width/2 + width/2;
-  ellipse(x, height/2, 16, 16);
-  theta = theta >= PI ? -PI : theta+0.02; 
+  background(255);
+  float period = 120;
+  float amplitude = width/2 - 10;
+  float x = cos(TWO_PI * frameCount / period)*amplitude;
+  ellipse(x+width/2, height/2, 16, 16);
+  line(width/2, height/2, x+width/2, height/2);
 }
