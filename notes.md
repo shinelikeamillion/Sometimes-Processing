@@ -15,3 +15,9 @@
 * translate() 设置此位置为所有绘制的相对位置
 * rect/ellipseMode(CENTER) 设置绘制模式
 * color() 取一个颜色
+* sin() cos() tan() 三角函数
+* atan() 反正切
+* atan() 方向向量的反正切，求角
+* heading2D() PVector 内部调用 atan2() 获取任何向量的弧度
+* PVector.random2D() 随机一个向量
+
