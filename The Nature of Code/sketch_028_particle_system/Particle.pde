@@ -8,8 +8,8 @@ class Particle {
   
   Particle(PVector l) {
     location = l.copy();
-    acceleration = new PVector(random(-0.05, 0.05), random(-0.05, 0.05));
-    velocity = new PVector(random(-1, 1), random(-1, 1));
+    acceleration = new PVector(random(-0.02, 0.02), random(-0.02, 0.02));
+    velocity = new PVector(random(-0.5, 0.5), random(-0.5, 0.5));
     lifespan = 255;
     aVelocity += acceleration.x;
   }
@@ -17,8 +17,17 @@ class Particle {
   void update() {
     velocity.add(acceleration);
     location.add(velocity);
-    lifespan -= 2.0;
+    if(touchedGround()) {
+      velocity = velocity.mult(-1);
+      acceleration = acceleration.mult(-1);
+    }
+    lifespan -= 1.0;
     angle = (angle + aVelocity) % TWO_PI;
+  }
+  
+  boolean touchedGround () {
+    return !((location.x > 0 && location.x < width)
+    && (location.y > 0 && location.y < height));
   }
   
   void display() {
