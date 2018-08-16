@@ -9,4 +9,6 @@ void draw() {
   background(255);
   ps.addParticle();
   ps.run();
+  
+  if(mousePressed) ps.setOrigin();
 }
