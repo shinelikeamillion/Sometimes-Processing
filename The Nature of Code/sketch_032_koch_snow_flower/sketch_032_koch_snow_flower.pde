@@ -1,18 +1,26 @@
 ArrayList<KochLine> lines;
 void setup() {
-  size(800, 300);
+  size(300, 300);
   lines = new ArrayList<KochLine>();
   
-  PVector start = new PVector(0, 250);
-  PVector end = new PVector(width, 250);
+  PVector start = new PVector(-35, -70*cos(PI/6));
+  PVector middle = new PVector(0, -70*cos(PI/6)*2);
+  PVector end1 = new PVector(35, -70*cos(PI/6));
   
-  lines.add(new KochLine(start, end));
+  lines.add(new KochLine(start, middle));
+  lines.add(new KochLine(middle, end1));
 }
 
 void draw() {
   background(255);
-  for(KochLine line : lines) {
-    line.display();
+  translate(width/2, height/2);
+  for(int i = 0; i < 6; i++){
+    pushMatrix();
+    rotate(i * PI/3);
+    for(KochLine line : lines) {
+      line.display();
+    }
+    popMatrix();
   }
 }
 
