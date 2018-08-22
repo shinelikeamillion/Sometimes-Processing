@@ -1,6 +1,6 @@
 boolean loop;
 void setup() {
-  size(800, 600);
+  size(1000, 800);
   strokeCap(SQUARE);
   loop = true;
 }
@@ -19,8 +19,8 @@ void branch(float len, float strength) {
   line(0, 0, 0, -len);
   translate(0, -len);
   
-  len *= 0.6;
-  strength = constrain(strength*0.8, 1, 6);
+  len *= 0.7;
+  strength = constrain(strength*0.7, 1, 6);
   int n = (int)random(1, 4);
   for (int i = 0; i < n; i++) {
     float theta = random(-PI/3, PI/3);
