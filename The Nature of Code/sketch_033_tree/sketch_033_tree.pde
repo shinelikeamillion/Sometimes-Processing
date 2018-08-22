@@ -8,7 +8,7 @@ void setup() {
 void draw() {
   drawLine(new PVector(width/2, height/2 + 300), new PVector(width/2, height/2+100));
 }
-int b = 0;
+
 void drawLine(PVector start, PVector end) {
   PVector v = PVector.sub(end, start).mult(2/3.0);
   if(v.mag() < 4) return;
