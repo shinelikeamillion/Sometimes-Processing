@@ -21,7 +21,7 @@ void branch(float len, float strength) {
   translate(0, -len);
   
   len *= 0.6;
-  float wind = map(noise(i), 0, 1, 0, PI/4);
+  float wind = map(noise(i), 0, 1, 0, PI/8);
   strength = constrain(strength*0.8, 1, 6);
   
   pushMatrix();
