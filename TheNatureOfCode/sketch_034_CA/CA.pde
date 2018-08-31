@@ -2,6 +2,7 @@ class CA {
   int[] cells;
   int[] ruleset;
   int size;
+  int generation = 0;
   
   CA() {
     size = 10;
@@ -24,6 +25,7 @@ class CA {
     }
     
     cells = nextgen;
+    generation++;
   }
   
   int rule(int a, int b, int c) {
@@ -38,7 +40,7 @@ class CA {
       if(cells[i] == 1){
         fill(0);
         stroke(0);
-        rect( i*size, 0, size, size);
+        rect( i*size, generation*size, size, size);
       }
     }
   }
