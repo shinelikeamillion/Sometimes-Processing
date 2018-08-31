@@ -38,8 +38,8 @@ class CA {
     for(int i = 1; i < cells.length-1; i++) {
       
       if(cells[i] == 1){
-        fill(0);
-        stroke(0);
+        fill(255);
+        stroke(175);
         rect( i*size, generation*size, size, size);
       }
     }
