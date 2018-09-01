@@ -17,10 +17,10 @@ void setup() {
 
 void draw() {
   for(Cell cell : cells){
-    if(cell.x/10  == 0 
-    || cell.x/10 == columns-1
-    || cell.y/10 == 0
-    || cell.y/10 == rows-1) continue;
+    //if(cell.x/10  == 0 
+    //|| cell.x/10 == columns-1
+    //|| cell.y/10 == 0
+    //|| cell.y/10 == rows-1) continue;
     
     int neighbors = 0;
     for(int i = -1; i <= 1; i++) {
@@ -28,6 +28,12 @@ void draw() {
         if(i == 0 && j == 0) continue;
         int x = cell.x/10 + i;
         int y = cell.y/10 + j;
+        
+        if(cell.x/10 == 0) x = columns -1;
+        if(cell.x/10 == columns-1) x = 0;
+        if(cell.y/10 == 0) y = rows -1;
+        if(cell.y/10 == rows-1) y = 0;
+        
         neighbors += cells[x + y*columns].state[1];
       }
     }

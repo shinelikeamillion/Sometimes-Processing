@@ -8,8 +8,8 @@ class Cell{
     this.x = x;
     this.y = y;
     this.w = w;
-    if(x == y){
-      state = new int[]{(int)random(2), (int)random(2)};
+    if(x == y || x < 33){
+      state = new int[]{1, 1};
     } else {
       state = new int[]{0, 0};
     }
