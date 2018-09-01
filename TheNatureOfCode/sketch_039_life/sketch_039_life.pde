@@ -11,6 +11,8 @@ void setup() {
       cells[x + y*columns] = new Cell(x*10, y*10, 10);
     }
   }
+  
+  frameRate(3);
 }
 
 void draw() {
@@ -19,13 +21,13 @@ void draw() {
     || cell.x/10 == columns-1
     || cell.y/10 == 0
     || cell.y/10 == rows-1) continue;
+    
     int neighbors = 0;
     for(int i = -1; i <= 1; i++) {
       for(int j = -1; j <= 1; j++) {
         if(i == 0 && j == 0) continue;
         int x = cell.x/10 + i;
         int y = cell.y/10 + j;
-        println(cell.x/10, y);
         neighbors += cells[x + y*columns].state[1];
       }
     }

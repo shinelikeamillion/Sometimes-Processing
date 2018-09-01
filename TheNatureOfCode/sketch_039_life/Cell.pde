@@ -15,7 +15,6 @@ class Cell{
     //if(state[0] == 0 && state[1] == 1) {
     //  fill(0, 0, 255);
     //} else 
-    println(state[1]);
     if (state[1] == 1) {
       fill(255);
     //} else if (state[0] == 1 && state[1] == 0) {
