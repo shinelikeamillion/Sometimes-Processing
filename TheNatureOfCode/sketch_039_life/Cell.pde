@@ -8,7 +8,11 @@ class Cell{
     this.x = x;
     this.y = y;
     this.w = w;
-    state = new int[]{(int)random(2), (int)random(2)};
+    if(x == y){
+      state = new int[]{(int)random(2), (int)random(2)};
+    } else {
+      state = new int[]{0, 0};
+    }
   }
   
   void dislpay() {
