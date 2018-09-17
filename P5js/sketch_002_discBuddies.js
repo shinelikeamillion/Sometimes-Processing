@@ -8,10 +8,8 @@ function setup() {
 }
 
 function draw() {
+  // t from 0 to 1
     t = mouseX*1.0/width;
-    c = mouseY*1.0/height;
-    // if (mousePressed)
-    //   println(c);
     draw_();
 }
 
@@ -25,6 +23,7 @@ function pop() {
   popMatrix();
 }
 
+// p from 0 to 1, g = speed
 function ease( p, g) {
   if (p < 0.5) 
     return 0.5 * pow(2*p, g);
@@ -43,6 +42,7 @@ function discs(){
   for (var i=0; i<N; i++) {
     if (i%2 == 0) {
       push();
+      // totate 0 to 60`
       rotate(TWO_PI*(i+2*ease(tt, 4.75))/N);
       ellipse(100, 0, 120, 120);
       pop();
@@ -51,8 +51,8 @@ function discs(){
       x = 100 + 140*ease(x, 7);
       push();
       rotate(TWO_PI*(i-2*ease(tt, 4.75))/N);
-      if (t>.5)
-        rotate(4*TWO_PI/N);
+      // in move 60` out move -60, t > .5 move 120`
+      if (t>.5) rotate(4*TWO_PI/N);
       ellipse(x, 0, 120, 120);
       pop();
     }
@@ -65,6 +65,11 @@ function draw_() {
   push();
   translate(width/2, height/2);
   discs();
+  copyHalfCanves();
+  pop();
+}
+
+function copyHalfCanves() {
   loadPixels();
   var d = pixelDensity();
   var halfImage = 4 * (width * d) * (height / 2 * d);
@@ -72,5 +77,4 @@ function draw_() {
     pixels[2*halfImage - 2 - i] = pixels[i];
   }
   updatePixels();
-  pop();
 }
