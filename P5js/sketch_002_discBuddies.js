@@ -73,8 +73,16 @@ function copyHalfCanves() {
   loadPixels();
   var d = pixelDensity();
   var halfImage = 4 * (width * d) * (height / 2 * d);
-  for(var i=0; i<halfImage; i++){
-    pixels[2*halfImage - 2 - i] = pixels[i];
+  /** 1234 => 4321 
+   * 网页像素颜色按照此顺序排列，反转之后，颜色也会反转会有问题
+   * 应该保证顺序不变
+   * red green blue alpha =》red green blue alpha
+   */
+  for(var i=0; i<halfImage; i+=4){
+    pixels[2*halfImage - i - 4] = pixels[i];
+    pixels[2*halfImage - i - 3] = pixels[i + 1];
+    pixels[2*halfImage - i - 2] = pixels[i + 2];
+    pixels[2*halfImage - i - 1] = pixels[i + 3];
   }
   updatePixels();
 }
