@@ -2,6 +2,7 @@
 // learningprocessing.com
 var input;
 var analyzer;
+var xx = 100;
 
 function setup() {
   createCanvas(710, 200);
@@ -22,9 +23,15 @@ function draw() {
   var threshold = 0.1;
   if (volume > threshold) {
     stroke(0);
-    fill(0, 100);
-    rect(random(40, width), random(height), volume*50, volume*50);
+    var ny = map(volume, 0, 1, -height/3, height)
+    rect( xx += 2, height/2 + ny, 5, 5);
   }
+  // var threshold = 0.1;
+  // if (volume > threshold) {
+  //   stroke(0);
+  //   fill(0, 100);
+  //   rect(random(40, width), random(height), volume*50, volume*50);
+  // }
 
   // Graph the overall potential volume, w/ a line at the threshold
   var y = map(volume, 0, 1, height, 0);
@@ -35,7 +42,7 @@ function draw() {
   rect(0, 0, 20, height);
   // Then draw a rectangle on the graph, sized according to volume
   fill(0);
-  rect(0, y, 20, y);
+  rect(0, y, 20, height);
   stroke(0);
   line(0, ythreshold, 19, ythreshold);
 }
