@@ -6,20 +6,34 @@
  * 2 spirals will become 3, then 3 will become 1.
  * Hold focus on the 1 spiral as long as possible.
  */
+var cFrom;
+var cTo;
+var halfWidth;
+var space;
+var maxSize = 200;
+var off = 0;
 function setup() {
-    createCanvas(windowWidth, windowHeight)
-    background(255)
-    noFill()
-    smooth();
-    var maxSize = 200;
-    var halfWidth = windowWidth/2;
-    var space = maxSize/4;
-    for(var i = 10; i < maxSize; i+=10) {
-      ellipse(halfWidth - space, height/2, i, i)
-      ellipse(halfWidth + space, height/2, i, i)
-    }
+  createCanvas(windowWidth, windowHeight)
+  background(255)
+  noFill()
+  smooth(8);
+  // strokeWeight(2);
+
+  colorMode(RGB);
+
+  cFrom = color(234,67,53);
+  cTo = color(66,133,244);
+  halfWidth = windowWidth/2;
+  space = maxSize/4;
+}
+
+function draw() {
+
+  for(var i = 10; i < maxSize; i+=10) {
+    var c = map(cos(map(i, 10, 190, -PI, 0) - off), -1, 1, 0, 1);
+    stroke(lerpColor(cFrom, cTo, c));
+    ellipse(halfWidth - space, height/2, i, i);
+    ellipse(halfWidth + space, height/2, i, i);
   }
-  
-  function draw() {
-  }
-  
+  off += 0.02;
+}
