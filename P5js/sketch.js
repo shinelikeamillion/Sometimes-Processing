@@ -1,48 +1,24 @@
-// Adapted from Learning Processing, Daniel Shiffman
-// learningprocessing.com
-var input;
-var analyzer;
-var xx = 100;
 
+/**
+ * inspire : https://twitter.com/transformvtion/status/1058898945588543488
+ * Focus on the center of the image
+ * and allow yout eyes to relax
+ * 2 spirals will become 3, then 3 will become 1.
+ * Hold focus on the 1 spiral as long as possible.
+ */
 function setup() {
-  createCanvas(710, 200);
-  background(255);
-
-  // Create an Audio input
-  input = new p5.AudioIn();
-
-  input.start();
+  createCanvas(windowWidth, windowHeight)
+  background(255)
+  noFill()
+  smooth();
+  var maxSize = 200;
+  var halfWidth = windowWidth/2;
+  var space = maxSize/4;
+  for(var i = 10; i < maxSize; i+=10) {
+    ellipse(halfWidth - space, height/2, i, i)
+    ellipse(halfWidth + space, height/2, i, i)
+  }
 }
 
 function draw() {
-  // Get the overall volume (between 0 and 1.0)
-  var volume = input.getLevel();
-
-  // If the volume > 0.1,  a rect is drawn at a random location.
-  // The louder the volume, the larger the rectangle.
-  var threshold = 0.1;
-  if (volume > threshold) {
-    stroke(0);
-    var ny = map(volume, 0, 1, -height/3, height)
-    rect( xx += 2, height/2 + ny, 5, 5);
-  }
-  // var threshold = 0.1;
-  // if (volume > threshold) {
-  //   stroke(0);
-  //   fill(0, 100);
-  //   rect(random(40, width), random(height), volume*50, volume*50);
-  // }
-
-  // Graph the overall potential volume, w/ a line at the threshold
-  var y = map(volume, 0, 1, height, 0);
-  var ythreshold = map(threshold, 0, 1, height, 0);
-
-  noStroke();
-  fill(175);
-  rect(0, 0, 20, height);
-  // Then draw a rectangle on the graph, sized according to volume
-  fill(0);
-  rect(0, y, 20, height);
-  stroke(0);
-  line(0, ythreshold, 19, ythreshold);
 }
