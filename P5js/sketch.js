@@ -13,9 +13,9 @@ var space;
 var maxSize = 200;
 var off = 0;
 function setup() {
-  createCanvas(windowWidth, windowHeight)
-  background(255)
-  noFill()
+  createCanvas(windowWidth, windowHeight);
+  background(255);
+  noFill();
   smooth(8);
   // strokeWeight(2);
 
