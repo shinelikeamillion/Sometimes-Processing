@@ -1,15 +1,22 @@
 you can check out all the reference here : https://p5js.org/reference/
 ### 记录一些常用 特性（API）
 1. Color
-    - lerpColor(): 从 0 ～ 1 取渐两个颜色渐变的对应颜色
+    - lerpColor(fromColor, toColor, 0.*): 从 0 ～ 1 取渐两个颜色渐变的对应颜色
+    - colorMode(RGB / HSB / HSL): 红绿蓝/色调饱和度/亮度（光度）
+    - lightness(): 提取颜色的光度值
+    - saturation(): 提取饱和度值
     - hue()
 
 2. Shape
+    - arc(): 圆弧
     - ellipse()
     - line()
     - point()
     - rect()
+    - quad(): 四角形
     - triangle()
+    - strokeJoin(MITER / BEVEL / ROUND): 连线风格
+    - begin/endShape() + vertex()： 更复杂的图形
 
 3. Constants
     - HALF_PI / PI / QUARTER_PI/ TWO_PI
