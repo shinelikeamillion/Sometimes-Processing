@@ -9,9 +9,11 @@ function Eyes(ex, ey, size, angle) {
     this.ey = ey;
     this.size = size;
     this.angle = angle;
+    this.offX = 0;
     this.update = function(mx, my) {
         // 此函数返回一个角度，避免了相减值为负的情况
         angle = atan2(my-ey, mx-ex);
+        offX = constrain(dist(mx, my, ex, ey), 0, size/4);
     };
     this.display = function() {
         push();
@@ -20,7 +22,7 @@ function Eyes(ex, ey, size, angle) {
         ellipse(0, 0, size, size);
         rotate(angle);
         fill(0);
-        ellipse(size/4, 0, size/2, size/2);
+        ellipse(offX, 0, size/2, size/2);
         pop();
     }
 }
