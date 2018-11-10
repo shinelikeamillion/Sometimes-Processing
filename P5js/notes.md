@@ -71,6 +71,14 @@ you can check out all the reference here : https://p5js.org/reference/
     - acos() / asin() / atan() ? 
     - cos() / sin() / tan(): 三角函数
     - atan2(): 屏蔽掉负数情况的正切函数
+    - degrees():将弧度转换成角度值
+    - radians(): 将角度值转换成对应的弧度值
+    - angleMode(): 角度模式
+    - exp(): 返回欧拉数
+    - log(): 自然对数
+    - mag(): 计算向量大小
+    - map(): 从一个范围映射一个数字到另一个范围
+    - norm(): 将一个数字标准化成一个介于 0 到 1 间的值
 
 11. Typography
 
