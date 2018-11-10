@@ -8,17 +8,19 @@ class Person {
         this.index = index;
         this.px = px;
         this.py = py;
-        this.shake = 4;
-        this.personility = random(200);
+        this.shake = 3;
+        this.personility = random(300);
         this.coutWake = 0;
         this.size = 10;
     }
     display () {
         push();
         translate(this.px, this.py);
-        if(this.coutWake < this.personility) {
+        if(this.coutWake < this.personility && this.personility < 290) {
+            fill(0)
             ellipse(0, 0, 10, 10);
         } else {
+            fill(255)
             ellipse(random(-this.shake, this.shake),
             random(-this.shake, this.shake), 10, 10);
             pushOthers(this.index);
@@ -26,17 +28,18 @@ class Person {
         pop();
     }
     push() {
-        this.coutWake ++;
+        if(this.coutWake < this.personility)
+            this.coutWake ++;
     }
 }
 
 /** 推动其他人
- * 规则，一个人一段动力起来则开始推动前后左右四位同学
+ * 规则，一个人一旦动起来则开始推动前后左右四位同学
  * 注意上下左右的边界
  */
 function pushOthers(index) {
     // 推动左右但没换行的同学
-    if(index-1 > 0 && persons[index].py == persons[index - 1].py)
+    if(index-1 >= 0 && persons[index].py == persons[index - 1].py)
         persons[index-1].push();
 
     if(index+1 < persons.length && persons[index].py == persons[index + 1].py)
@@ -55,6 +58,7 @@ function setup() {
     createCanvas(400, 400);
     smooth();
     noStroke();
+    frameRate(20)
     // 为舍弃小数点后，调试很久。。
     num = (int)(width / 15);
     for(var i = 0; i < num; i++) {
@@ -65,12 +69,9 @@ function setup() {
 }
 
 function draw() {
-    background(0);
+    background(135);
     persons.forEach(function(person){
         person.display();
     });
-    persons[0].shake = 4;
-    persons[0].personility = 17;
-    persons[0].push();
 }
 
