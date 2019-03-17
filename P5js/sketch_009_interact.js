@@ -54,6 +54,9 @@ function pushOthers(index) {
 var persons = new Array();
 var space = 5;
 var num;
+
+var startDrawing = false;
+
 function setup() {
     createCanvas(400, 400);
     smooth();
@@ -70,8 +73,13 @@ function setup() {
 
 function draw() {
     background(135);
+    if(!startDrawing) return;
     persons.forEach(function(person){
         person.display();
     });
+}
+
+function mouseClicked() {
+    startDrawing = !startDrawing;
 }
 
