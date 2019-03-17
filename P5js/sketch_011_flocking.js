@@ -24,7 +24,8 @@ function draw(){
 }
 
 function mouseClicked(){
-  flock.addBoid(new Boid(mouseX, mouseY))
+  // flock.addBoid(new Boid(mouseX, mouseY))
+  flock.addHindrance(new Hindrance(mouseX, mouseY))
 }
 function mouseDragged(){
   flock.addBoid(new Boid(mouseX, mouseY))
@@ -32,16 +33,35 @@ function mouseDragged(){
 
 function Flock() {
   this.boids = []
+  this.hindrances = []
 }
 
 Flock.prototype.run = function() {
   for(let i = 0; i < this.boids.length; i++){
-    this.boids[i].run(this.boids)
+    this.boids[i].run(this.boids, this.hindrances)
+  }
+
+  for(let i = 0; i < this.hindrances.length; i++){
+    this.hindrances[i].show()
   }
 }
 
 Flock.prototype.addBoid = function(b) {
   this.boids.push(b)
+}
+
+Flock.prototype.addHindrance = function(h) {
+  this.hindrances.push(h)
+}
+
+function Hindrance(x, y) {
+  this.r = 20
+  this.level = random(0.1, 2)
+  this.position = createVector(x, y)
+}
+
+Hindrance.prototype.show = function() {
+  ellipse(this.position.x, this.position.y, this.r, this.r)
 }
 
 function Boid(x, y) {
@@ -74,6 +94,33 @@ Boid.prototype.separate = function(boids) {
   // Average: divide by how many
   if(count > 0) steer.div(count)
 
+  if(steer.mag() > 0) {
+    steer.normalize()
+    steer.mult(this.maxSpeed)
+    steer.sub(this.velocity)
+    steer.limit(this.maxForce)
+  }
+  return steer
+}
+
+Boid.prototype.separateHindrance = function(hindrances) {
+  let desiredseparation = 50.0
+  let steer = createVector(0, 0)
+  let count = 0;
+  for(let i = 0; i < hindrances.length; i++) {
+    let d = p5.Vector.dist(this.position, hindrances[i].position)
+    if((d > 0) && (d < desiredseparation)) {
+      let diff = p5.Vector.sub(this.position, hindrances[i].position)
+      // little bit different here
+      diff.normalize()
+      diff.div(d)
+      steer.add(diff)
+      count++
+    }
+  }
+
+  // it's necessary here?
+  if(count > 0) steer.div(count)
   if(steer.mag() > 0) {
     steer.normalize()
     steer.mult(this.maxSpeed)
@@ -141,6 +188,7 @@ Boid.prototype.cohesion = function(boids) {
     return createVector(0, 0)
   }
 }
+
 // Wraparound
 Boid.prototype.borders = function() {
   if(this.position.x < -this.r) this.position.x = width + this.r
@@ -153,16 +201,19 @@ Boid.prototype.applyForce = function(force) {
   this.acceleration.add(force)
 }
 
-Boid.prototype.flock = function(boids) {
+Boid.prototype.flock = function(boids, hindrances) {
   let sep = this.separate(boids)
   let ali = this.align(boids)
   let coh = this.cohesion(boids)
+  let hin = this.separateHindrance(hindrances)
 
   sep.mult(1.5)
   ali.mult(1.0)
   coh.mult(1.0)
+  hin.mult(2.0)
 
   this.applyForce(sep)
+  this.applyForce(hin)
   this.applyForce(ali)
   this.applyForce(coh)
 }
@@ -191,8 +242,8 @@ Boid.prototype.render = function() {
   pop()
 }
 
-Boid.prototype.run = function(boids){
-  this.flock(boids)
+Boid.prototype.run = function(boids, hindrances){
+  this.flock(boids, hindrances)
   this.update()
   this.borders()
   this.render()
