@@ -11,6 +11,16 @@ function setup(){
 }
 
 function draw(){
+
+    // bezier(0, halfWindowH,
+    //     halfWindowW/4, halfWindowH + value,
+    //     halfWindowW*3/4, halfWindowH + value,
+    //     windowWidth, halfWindowH)
+    // bezier(0, halfWindowH,
+    //     halfWindowW*5/4, halfWindowH + value,
+    //     halfWindowW*7/4, halfWindowH + value,
+    //     windowWidth, halfWindowH)
+
     bezier(0, halfWindowH,
         halfWindowW/4, halfWindowH + value,
         halfWindowW*3/4, halfWindowH + value,
