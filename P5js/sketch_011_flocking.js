@@ -6,9 +6,14 @@
  * http://natureofcode.com
  */
 
+ /** 添加一些规则
+  * 拦路者：遇到无需回避，绕开就行
+  * 扑食者：遇到立马逃跑
+  */
+
 let flock
 function setup() {
-  createCanvas(windowWidth, windowHeight)
+  createCanvas(windowWidth, windowHeight - 50)
   createP("Drag the mouse to generate new boids")
   
   flock = new Flock()
@@ -53,7 +58,7 @@ Flock.prototype.addBoid = function(b) {
 Flock.prototype.addHindrance = function(h) {
   this.hindrances.push(h)
 }
-
+ 
 function Hindrance(x, y) {
   this.r = 20
   this.level = random(0.1, 2)
@@ -104,23 +109,18 @@ Boid.prototype.separate = function(boids) {
 }
 
 Boid.prototype.separateHindrance = function(hindrances) {
-  let desiredseparation = 50.0
+  let desiredseparation = 100.0
   let steer = createVector(0, 0)
-  let count = 0;
   for(let i = 0; i < hindrances.length; i++) {
     let d = p5.Vector.dist(this.position, hindrances[i].position)
     if((d > 0) && (d < desiredseparation)) {
       let diff = p5.Vector.sub(this.position, hindrances[i].position)
-      // little bit different here
       diff.normalize()
       diff.div(d)
       steer.add(diff)
-      count++
     }
   }
 
-  // it's necessary here?
-  if(count > 0) steer.div(count)
   if(steer.mag() > 0) {
     steer.normalize()
     steer.mult(this.maxSpeed)

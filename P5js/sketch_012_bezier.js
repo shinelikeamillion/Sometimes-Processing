@@ -6,12 +6,11 @@ function setup(){
     halfWindowH = windowHeight/2
     halfWindowW = windowWidth/2
     noFill()
-    background(0)
     stroke(100, 100, 200)
 }
 
 function draw(){
-
+    background(0)
     // bezier(0, halfWindowH,
     //     halfWindowW/4, halfWindowH + value,
     //     halfWindowW*3/4, halfWindowH + value,
