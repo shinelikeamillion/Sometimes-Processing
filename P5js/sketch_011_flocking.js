@@ -42,12 +42,13 @@ function Flock() {
 }
 
 Flock.prototype.run = function() {
-  for(let i = 0; i < this.boids.length; i++){
-    this.boids[i].run(this.boids, this.hindrances)
-  }
 
   for(let i = 0; i < this.hindrances.length; i++){
     this.hindrances[i].show()
+  }
+
+  for(let i = 0; i < this.boids.length; i++){
+    this.boids[i].run(this.boids, this.hindrances)
   }
 }
 
@@ -61,11 +62,13 @@ Flock.prototype.addHindrance = function(h) {
  
 function Hindrance(x, y) {
   this.r = 20
-  this.level = random(0.1, 2)
+  this.level = random(0.1, 0.3)
   this.position = createVector(x, y)
+  this.bad = this.level > 0.2
 }
 
 Hindrance.prototype.show = function() {
+  fill(this.bad ? color(219, 68, 55) : color(15, 175, 88))
   ellipse(this.position.x, this.position.y, this.r, this.r)
 }
 
@@ -111,22 +114,24 @@ Boid.prototype.separate = function(boids) {
 Boid.prototype.separateHindrance = function(hindrances) {
   let desiredseparation = 100.0
   let steer = createVector(0, 0)
+  // 合力方向
   for(let i = 0; i < hindrances.length; i++) {
     let d = p5.Vector.dist(this.position, hindrances[i].position)
     if((d > 0) && (d < desiredseparation)) {
       let diff = p5.Vector.sub(this.position, hindrances[i].position)
       diff.normalize()
-      diff.div(d)
+      diff.mult(hindrances[i].level)
+      diff.mult(1 - d/100)
       steer.add(diff)
     }
   }
 
-  if(steer.mag() > 0) {
-    steer.normalize()
-    steer.mult(this.maxSpeed)
-    steer.sub(this.velocity)
-    steer.limit(this.maxForce)
-  }
+  // if(steer.mag() > 0) {
+  //   steer.normalize()
+  //   steer.mult(this.maxSpeed)
+  //   steer.sub(this.velocity)
+  //   steer.limit(0.08)
+  // }
   return steer
 }
 
@@ -210,7 +215,7 @@ Boid.prototype.flock = function(boids, hindrances) {
   sep.mult(1.5)
   ali.mult(1.0)
   coh.mult(1.0)
-  hin.mult(2.0)
+  hin.mult(1.0)
 
   this.applyForce(sep)
   this.applyForce(hin)
