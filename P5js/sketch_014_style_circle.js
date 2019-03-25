@@ -2,7 +2,7 @@ let size = 20;
 let padding = 10;
 let gap = 3;
 let style1 = {
-  color:"#4527a0",
+  color:"#40C4FF",
   show:function(x, y, n){
   	stroke(this.color);
 		ellipse(x, y, 6 + n, 6 + n);
@@ -10,7 +10,7 @@ let style1 = {
 }
 
 let style2 = {
-  color:"#7953d2",
+  color:"#C0CA33",
   show:function(x, y, n){
   	stroke(this.color);
 		ellipse(x, y, size, size);
@@ -19,19 +19,21 @@ let style2 = {
 }
 
 let style3 = {
-  color:"#4527a0",
+  color:"#EF6C00",
   show:function(x, y, n){
   	stroke(this.color);
-		ellipse(x, y, size, size);
+    ellipse(x, y, size, size);
+    stroke(color("#00796B"))
 		ellipse(x, y, size, size + (n - 10));
   }
 }
 
 let style4 = {
-  color:"#4527a0",
+  color:"#EF6C00",
   show:function(x, y, n){
   	stroke(this.color);
-		ellipse(x, y, size, size);
+    ellipse(x, y, size, size);
+    stroke(color("#00796B"))
 		ellipse(x, y, size + (n - 10), size);
   }
 }
@@ -48,8 +50,8 @@ function setup() {
 }
 
 function draw() {
-  background(220);
-  let n = map(sin(theta+=0.02), -1, 1, 0, 10);
+  background(0);
+  let n = map(sin(theta+=0.1), -1, 1, 0, 10);
   for(i = 0; i < nums; i++){
     for(j = 0; j < nums; j++) {
       let x = i * size + size/2 + padding;
@@ -59,7 +61,7 @@ function draw() {
       if(i % 2 == 0 && j % 2 == 0) {
         style1.show(x, y, n);
       } else if(i % 2 == 1 && j % 2 == 1) {
-        style2.show(x, y, n);
+        style2.show(x, y, -n);
       } else if(i % 2 == 0 && j % 2 == 1) {
         style3.show(x, y, n);
       } else if(i % 2 == 1 && j % 2 == 0) {
