@@ -1,4 +1,6 @@
 let size = 20;
+let padding = 10;
+let gap = 3;
 let style1 = {
   color:"#4527a0",
   show:function(x, y, n){
@@ -37,12 +39,12 @@ let style4 = {
 var nums;
 var theta  = 0;
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(410, 410);
 	strokeWeight(2);
   smooth();
 	noFill();
   
-  nums = width/size;
+  nums = (width - 2 * padding) / (size + gap);
 }
 
 function draw() {
@@ -50,8 +52,10 @@ function draw() {
   let n = map(sin(theta+=0.02), -1, 1, 0, 10);
   for(i = 0; i < nums; i++){
     for(j = 0; j < nums; j++) {
-      let x = i * size + size/2;
-      let y = j * size + size/2;
+      let x = i * size + size/2 + padding;
+      let y = j * size + size/2 + padding;
+      x += i * gap;
+      y += j * gap;
       if(i % 2 == 0 && j % 2 == 0) {
         style1.show(x, y, n);
       } else if(i % 2 == 1 && j % 2 == 1) {
