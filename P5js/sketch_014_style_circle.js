@@ -43,7 +43,7 @@ var theta  = 0;
 function setup() {
   createCanvas(410, 410);
 	strokeWeight(2);
-  // smooth();
+  smooth();
 	noFill();
   
   nums = (width - 2 * padding) / (size + gap);
