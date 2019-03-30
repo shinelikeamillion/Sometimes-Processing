@@ -97,23 +97,25 @@ function draw() {
       x += i * gap;
       y += j * gap;
 
-      var style
-      let ran = random()
-      if(ran > 0.4) {
-        style = styles[0]
-      } else {
-        style = styles[Math.floor(random()*styles.length - 1) + 1]
-      }
-      style.show(x, y)
-      // if(i % 2 == 0 && j % 2 == 0) {
-      //   style1.show(x, y);
-      // } else if(i % 2 == 1 && j % 2 == 1) {
-      //   style2.show(x, y);
-      // } else if(i % 2 == 0 && j % 2 == 1) {
-      //   style5.show(x, y);
-      // } else if(i % 2 == 1 && j % 2 == 0) {
-      //   style6.show(x, y);
+      // random style
+      // var style
+      // let ran = random()
+      // if(ran > 0.4) {
+      //   style = styles[0]
+      // } else {
+      //   style = styles[Math.floor(random()*styles.length - 1) + 1]
       // }
+      // style.show(x, y)
+
+      if(i % 2 == 0 && j % 2 == 0) {
+        style1.show(x, y);
+      } else if(i % 2 == 1 && j % 2 == 1) {
+        style2.show(x, y);
+      } else if(i % 2 == 0 && j % 2 == 1) {
+        style5.show(x, y);
+      } else if(i % 2 == 1 && j % 2 == 0) {
+        style6.show(x, y);
+      }
     }
   }
 }
