@@ -3,7 +3,7 @@ let padding = 10;
 let gap = 3;
 
 let style1 = {
-  color:"#FFFFFF",
+  color:"#000000",
   show:function(x, y){
   	stroke(this.color);
 		ellipse(x, y, size, size);
@@ -11,7 +11,7 @@ let style1 = {
 }
 
 let style2 = {
-  color:"#FFFFFF",
+  color:"#000000",
   show:function(x, y){
   	stroke(this.color);
 		ellipse(x, y, size, size);
@@ -20,7 +20,7 @@ let style2 = {
 }
 
 let style3 = {
-  color:"#FFFFFF",
+  color:"#000000",
   show:function(x, y){
   	stroke(this.color);
     ellipse(x, y, size, size);
@@ -46,7 +46,6 @@ function setup() {
 // todo 区域内平均色值； 动态大小
 function draw() {
   background(mouseIsPressed?80:255);
-  // image(img, 0, 0)
   // test
   // style3.show(width/2, height/2)
   for(i = 0; i < nums; i++){
@@ -57,10 +56,13 @@ function draw() {
       let ix = parseInt(map(x, 0, width,0, img.width))
       let index = (ix + iy * img.width) * 4
       let level = brightness(getColor(img, index))
-      if(level < 100) {
-        style1.color = map(level, 0, 100, 0, 255)
+      // style1.color = map(level, 0, 100, 0, 255)
+      if(level < 10) 
+        style3.show(x, y)
+      else if(level < 60)
+        style2.show(x, y)
+      else if(level < 100)
         style1.show(x, y)
-      }
     }
   }
   
@@ -76,6 +78,7 @@ function getColor(img, index){
 }
 
 function testColorPicker() {
+  image(img, 0, 0)
   var x = parseInt(map(mouseX, 0, width, 0, img.width))
   var y = parseInt(map(mouseY, 0, height, 0, img.height))
   let index = (x + y * img.width) * 4
