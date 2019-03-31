@@ -30,12 +30,13 @@ let style3 = {
 }
 let img;
 let nums;
+let cavs;
 function preload(){
   img = loadImage('http://localhost:5500/P5js/sources/lou.jpg')
 }
 
 function setup() {
-  createCanvas(410, 410)
+  cavs = createCanvas(410, 410)
 	strokeWeight(1.5)
   smooth(8)
   noFill()
@@ -46,6 +47,7 @@ function setup() {
 // todo 区域内平均色值； 动态大小
 function draw() {
   background(mouseIsPressed?80:255);
+  // testColorPicker()
   // test
   // style3.show(width/2, height/2)
   for(i = 0; i < nums; i++){
@@ -65,8 +67,6 @@ function draw() {
         style1.show(x, y)
     }
   }
-  
-  // testColorPicker()
 }
 
 function getColor(img, index){
@@ -77,17 +77,21 @@ function getColor(img, index){
     )
 }
 
-function testColorPicker() {
-  image(img, 0, 0)
-  var x = parseInt(map(mouseX, 0, width, 0, img.width))
-  var y = parseInt(map(mouseY, 0, height, 0, img.height))
-  let index = (x + y * img.width) * 4
-  fill(getColor(img, index))
-  ellipse(x, y, 20, 20)
-  ellipse(mouseX, mouseY, 30, 30)
+// function testColorPicker() {
+//   image(img)
+  // var x = parseInt(map(mouseX, 0, width, 0, img.width))
+  // var y = parseInt(map(mouseY, 0, height, 0, img.height))
+  // let index = (x + y * img.width) * 4
+  // fill(getColor(img, index))
+  // ellipse(x, y, 20, 20)
+  // ellipse(mouseX, mouseY, 30, 30)
 
-  if(mouseIsPressed){
-    println(x+"-"+y+"-"+index)
-  }
-}
+  // if(mouseIsPressed){
+  //   println(x+"-"+y+"-"+index)
+  // }
+// }
+
+// function mousePressed(){
+//   saveCanvas(cavs, 'final', 'jpg')
+// }
 
