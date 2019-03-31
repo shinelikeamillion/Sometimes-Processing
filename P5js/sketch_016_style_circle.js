@@ -39,13 +39,13 @@ function setup() {
 	strokeWeight(2);
   smooth(8);
   noFill();
-  noLoop(); // preload img or img will not show
+  // noLoop(); // preload img or img will not show
   img.loadPixels()
   nums = (width - 2 * padding) / (size + gap);
 }
-
+// todo 区域内平均色值； 动态大小
 function draw() {
-  background(255);
+  background(mouseIsPressed?80:255);
   // image(img, 0, 0)
   // test
   // style3.show(width/2, height/2)
