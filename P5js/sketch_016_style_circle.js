@@ -1,31 +1,31 @@
-let size = 20;
-let padding = 10;
-let gap = 3;
+let size = 16
+let padding = size/2
+let gap = size/5
 
 let style1 = {
   color:"#000000",
   show:function(x, y){
-  	stroke(this.color);
-		ellipse(x, y, size, size);
+  	stroke(this.color)
+		ellipse(x, y, size, size)
   }
 }
 
 let style2 = {
   color:"#000000",
   show:function(x, y){
-  	stroke(this.color);
-		ellipse(x, y, size, size);
-		ellipse(x, y, size - 6, size - 6);
+  	stroke(this.color)
+		ellipse(x, y, size, size)
+		ellipse(x, y, 0.7*size, 0.7*size)
   }
 }
 
 let style3 = {
   color:"#000000",
   show:function(x, y){
-  	stroke(this.color);
-    ellipse(x, y, size, size);
-		ellipse(x, y, size - 7, size - 7);
-    ellipse(x, y, size - 14, size - 14);
+  	stroke(this.color)
+    ellipse(x, y, size, size)
+		ellipse(x, y,size/2 + 3, size/2 + 3)
+    ellipse(x, y, size/4+1, size/4+1)
   }
 }
 let img;
@@ -35,13 +35,13 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(410, 410);
-	strokeWeight(2);
-  smooth(8);
-  noFill();
+  createCanvas(410, 410)
+	strokeWeight(1.5)
+  smooth(8)
+  noFill()
   // noLoop(); // preload img or img will not show
   img.loadPixels()
-  nums = (width - 2 * padding) / (size + gap);
+  nums = (width - 2 * padding) / (size + gap)
 }
 // todo 区域内平均色值； 动态大小
 function draw() {
