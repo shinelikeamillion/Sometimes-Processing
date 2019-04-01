@@ -1,4 +1,4 @@
-let size = 6
+let size = 16
 let padding = size/2
 let gap = size/10
 let canvasSize = 410
@@ -6,7 +6,7 @@ let canvasSize = 410
 let style1 = {
   color:"#000000",
   show:function(x, y){
-  	stroke(this.color)
+  	// stroke(this.color)
 		ellipse(x, y, size, size)
   }
 }
@@ -14,7 +14,7 @@ let style1 = {
 let style2 = {
   color:"#000000",
   show:function(x, y){
-  	stroke(this.color)
+  	// stroke(this.color)
 		ellipse(x, y, size, size)
 		ellipse(x, y, 0.7*size, 0.7*size)
   }
@@ -23,7 +23,7 @@ let style2 = {
 let style3 = {
   color:"#000000",
   show:function(x, y){
-  	stroke(this.color)
+  	// stroke(this.color)
     ellipse(x, y, size, size)
 		ellipse(x, y,size/2 + 3, size/2 + 3)
     ellipse(x, y, size/4+1, size/4+1)
@@ -41,7 +41,7 @@ function setup() {
 	strokeWeight(1.5)
   smooth(8)
   noFill()
-  // noLoop(); // preload img or img will not show
+  noLoop(); // preload img or img will not show
   img.loadPixels()
   nums = (width - 2 * padding) / (size + gap)
 }
@@ -60,11 +60,12 @@ function draw() {
       let index = (ix + iy * img.width) * 4
       let level = brightness(getColor(img, index))
       // style1.color = map(level, 0, 100, 0, 255)
+      stroke(level)
       if(level < 10) 
         style3.show(x, y)
       else if(level < 60)
         style2.show(x, y)
-      else if(level < 100)
+      else if(level < 101)
         style1.show(x, y)
     }
   }
@@ -92,7 +93,7 @@ function getColor(img, index){
   // }
 // }
 
-// function mousePressed(){
-//   saveCanvas(cavs, 'final', 'jpg')
-// }
+function mousePressed(){
+  saveCanvas(cavs, 'final', 'jpg')
+}
 
