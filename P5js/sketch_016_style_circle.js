@@ -1,6 +1,7 @@
-let size = 16
+let size = 6
 let padding = size/2
-let gap = size/5
+let gap = size/10
+let canvasSize = 410
 
 let style1 = {
   color:"#000000",
@@ -36,7 +37,7 @@ function preload(){
 }
 
 function setup() {
-  cavs = createCanvas(410, 410)
+  cavs = createCanvas(canvasSize, canvasSize)
 	strokeWeight(1.5)
   smooth(8)
   noFill()
@@ -46,7 +47,7 @@ function setup() {
 }
 // todo 区域内平均色值； 动态大小
 function draw() {
-  background(mouseIsPressed?80:255);
+  background(mouseIsPressed?255:175);
   // testColorPicker()
   // test
   // style3.show(width/2, height/2)
