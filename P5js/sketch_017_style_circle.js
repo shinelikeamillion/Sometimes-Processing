@@ -1,7 +1,8 @@
 let size = 15
-let padding = size/2
 let gap = size/10
 let canvasSize = 620
+let nums = parseInt(canvasSize / (size + gap))
+let padding = (canvasSize - nums * (size + gap) + gap) / 2
 
 let style1 = {
   color:"#000000",
@@ -30,7 +31,6 @@ let style3 = {
   }
 }
 let img;
-let nums;
 let cavs;
 function preload(){
   img = loadImage('http://localhost:5500/P5js/sources/lou.jpg')
@@ -43,7 +43,6 @@ function setup() {
   noFill()
   noLoop(); // preload img or img will not show
   img.loadPixels()
-  nums = (width - 2 * padding) / (size + gap)
 }
 // todo 区域内平均色值； 动态大小
 function draw() {
@@ -71,16 +70,16 @@ function draw() {
 
 function getColor(img, ix, iy){
   var r, g, b
-  // let offset = parseInt(3/2)
+  let offset = 1
   // for(i = 0; i < 3; i++) {
   //   for(j = 0; j < 3; j++) {
-  //     let xcol = ix + i - offset
-  //     let ycol = iy + j - offset
-  //     let index = constrain((xcol + ycol * img.width) * 4, 0, img.pixels.length-1)
-      
-  //     r += (img.pixels[index] / pow(3, 2));
-  //     g += (img.pixels[index+1] / pow(3, 2));
-  //     b += (img.pixels[index+2] / pow(3, 2));
+  //     // let xcol = ix + i - offset
+  //     // let ycol = iy + j - offset
+  //     // let index = constrain((xcol + ycol * img.width) * 4, 0, img.pixels.length-1)
+  //     print(i + "=" + j)
+  //     // r += (img.pixels[index] / pow(3, 2));
+  //     // g += (img.pixels[index+1] / pow(3, 2));
+  //     // b += (img.pixels[index+2] / pow(3, 2));
   //   }
   // }
   let index = (ix + iy * img.width) * 4
