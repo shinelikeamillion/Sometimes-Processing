@@ -58,34 +58,28 @@ function draw() {
       let ix = parseInt(map(x, 0, width,0, img.width))
       
       stroke(getColor(img, ix, iy))
-      // if(level < 10) 
       style3.show(x, y)
-    //   else if(level < 60)
-    //     style2.show(x, y)
-    //   else if(level < 101)
-    //     style1.show(x, y)
     }
   }
 }
 
 function getColor(img, ix, iy){
-  var r, g, b
+  var r = 0, g = 0, b = 0
   let offset = 1
-  // for(i = 0; i < 3; i++) {
-  //   for(j = 0; j < 3; j++) {
-  //     // let xcol = ix + i - offset
-  //     // let ycol = iy + j - offset
-  //     // let index = constrain((xcol + ycol * img.width) * 4, 0, img.pixels.length-1)
-  //     print(i + "=" + j)
-  //     // r += (img.pixels[index] / pow(3, 2));
-  //     // g += (img.pixels[index+1] / pow(3, 2));
-  //     // b += (img.pixels[index+2] / pow(3, 2));
-  //   }
-  // }
-  let index = (ix + iy * img.width) * 4
-  r = img.pixels[index]
-  g = img.pixels[index+1]
-  b = img.pixels[index+2]
+  for(let n = 0; n < 3; n++) {
+    let ycol = iy + n - offset
+    for(let m = 0; m < 3; m++) {
+      let xcol = ix + m - offset
+      let index = parseInt(constrain((xcol + ycol * img.width) * 4, 0, img.pixels.length-1))
+      r += img.pixels[index] / pow(3, 2);
+      g += (img.pixels[index+1] / pow(3, 2));
+      b += (img.pixels[index+2] / pow(3, 2));
+    }
+  }
+  // let index = (ix + iy * img.width) * 4
+  // r = img.pixels[index]
+  // g = img.pixels[index+1]
+  // b = img.pixels[index+2]
   return color(r, g, b)
 }
 
