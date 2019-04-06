@@ -1,5 +1,5 @@
-let size = 15
-let gap = size/10
+let size = 8
+let gap = size/5
 let canvasSize = 620
 let nums = parseInt(canvasSize / (size + gap))
 let padding = (canvasSize - nums * (size + gap) + gap) / 2
@@ -32,16 +32,18 @@ let style3 = {
 }
 let img;
 let cavs;
+let imgSize;
 function preload(){
-  img = loadImage('http://localhost:5500/P5js/sources/lou.jpg')
+  img = loadImage('http://localhost:5500/P5js/sources/dylan.jpg')
 }
 
 function setup() {
   cavs = createCanvas(canvasSize, canvasSize)
-	strokeWeight(1.5)
+	// strokeWeight(1.5)
   smooth(8)
   noFill()
   noLoop(); // preload img or img will not show
+  imgSize = img.width < img.height ? img.width : img.height;
   img.loadPixels()
 }
 // todo 区域内平均色值； 动态大小
@@ -52,10 +54,10 @@ function draw() {
   // style3.show(width/2, height/2)
   for(i = 0; i < nums; i++){
     let y = i * (size + gap) + size/2 + padding
-    let iy = parseInt(map(y, 0, height, 0, img.height))
+    let iy = parseInt(map(y, 0, height, 0, imgSize))
     for(j = 0; j < nums; j++) {
       let x = j * (size + gap) + size/2 + padding
-      let ix = parseInt(map(x, 0, width,0, img.width))
+      let ix = parseInt(map(x, 0, width,0, imgSize))
       
       stroke(getColor(img, ix, iy))
       style3.show(x, y)
@@ -97,7 +99,7 @@ function getColor(img, ix, iy){
   // }
 // }
 
-// function mousePressed(){
-//   saveCanvas(cavs, 'final', 'jpg')
-// }
+function mousePressed(){
+  saveCanvas(cavs, 'final', 'jpg')
+}
 
