@@ -8,7 +8,9 @@ function setup() {
 var i = 0;
 var y = 0;
 function draw() {
-  background(175);
+  background(0);
+  noFill()
+  stroke(255)
   
 //   1
   // while(i<100){

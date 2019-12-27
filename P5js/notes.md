@@ -63,8 +63,9 @@ you can check out all the reference here : https://p5js.org/reference/
 
 10. Math
     - createVector() // 创建一个向量
-    - abs()
-    - ceil() ?
+    - abs()  取绝对值
+    - ceil()  浮点数向上取整
+    - pow() 几次方
     - constrain(): 限制取值区间
     - dist(): 距离
     - noise(): 噪音函数

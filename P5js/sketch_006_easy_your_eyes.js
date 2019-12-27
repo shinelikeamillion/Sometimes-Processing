@@ -16,7 +16,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight)
   background(255)
   noFill()
-  smooth(8);
+  smooth();
   // strokeWeight(2);
 
   colorMode(RGB);
@@ -30,7 +30,7 @@ function setup() {
 function draw() {
 
   for(var i = 10; i < maxSize; i+=10) {
-    var c = map(cos(map(i, 10, 190, -PI, 0) - off), -1, 1, 0, 1);
+    var c = map(cos(map(i, 10, 190, -TWO_PI, 0) - off), -1, 1, 0, 1);
     stroke(lerpColor(cFrom, cTo, c));
     ellipse(halfWidth - space, height/2, i, i);
     ellipse(halfWidth + space, height/2, i, i);
