@@ -1,3 +1,6 @@
+// Copyright: https://www.openprocessing.org/sketch/683686
+// 作者用了 ES6 的写法，需要学习一下
+
 f=0
 setup=draw=_=>{
     createCanvas(300,b=500)
