@@ -1,5 +1,5 @@
 
-step = 2
+step = 9
 rate = 0
 preload=_=> {
     bg = loadImage('http://localhost:5500/P5js/sources/dylan.jpg')
