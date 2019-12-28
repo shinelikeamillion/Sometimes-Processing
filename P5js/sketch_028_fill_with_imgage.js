@@ -22,7 +22,7 @@ draw=_=>{
             vertex(x, y - b[x/step])
             // >= 至关重要( 为 ！（x < width）)
             if(x+step >= width){
-                for(let x1 = x; x1 > 0; x1-=step){
+                for(let x1 = x; x1 >= 0; x1-=step){
                     vertex(x1, y + b[x1/step])
                 }
             }
