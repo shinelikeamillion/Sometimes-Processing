@@ -1,5 +1,6 @@
 setup = _ => {
     createCanvas(600, 600)
+    // noLoop()
 }
 draw = _ => {
     translate(width / 2, height / 2)
@@ -9,6 +10,6 @@ draw = _ => {
         p = map(i, 0, width / 2, 0, t)
         y = i * sin(p)
         x = i * cos(p)
-        line(x, y, x, y + map(i, 0, width / 2, 2, 20))
+        text(char(int(65+i/25)), x, y + map(i, 0, width / 2, 2, 20))
     }
 }
