@@ -10,6 +10,7 @@ draw = _ => {
         p = map(i, 0, width / 2, 0, t)
         y = i * sin(p)
         x = i * cos(p)
-        text(char(int(65+i/25)), x, y + map(i, 0, width / 2, 2, 20))
+        textSize(map(i, 0, width / 2, 2, 20))
+        text(char(int(65+i/25)), x, y)
     }
 }
