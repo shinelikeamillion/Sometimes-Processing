@@ -1,6 +1,5 @@
 setup = _ => {
     createCanvas(600, 600)
-    noFill()
 }
 draw = _ => {
     translate(width / 2, height / 2)
