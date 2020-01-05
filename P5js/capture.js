@@ -1,0 +1,4 @@
+
+mousePressed =_=> {
+    print('capture')
+}
