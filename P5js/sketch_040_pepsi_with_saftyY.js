@@ -1,5 +1,6 @@
 setup=_=>{
     createCanvas(500,500)
+    setAttributes('antialias', true);
     stroke(255)
 }
 
