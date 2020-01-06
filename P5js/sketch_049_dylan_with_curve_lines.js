@@ -6,13 +6,12 @@ preload=_=>{
 }
 setup=_=> {
     createCanvas(500,500)
-    noFill()
     stroke(color(255, 40, 100))
+    noFill()
     noLoop()
     rate = bg.width < bg.height ? bg.width/width : bg.height/height
 }
 draw=_=>{
-    stroke(color(255, 40, 100))
     for (let y = step/2; y < height; y+=step) {
         beginShape()
         for(let x = 0; x < width; x+=1){
