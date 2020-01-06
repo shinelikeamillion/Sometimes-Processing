@@ -13,6 +13,7 @@ you can check out all the reference here : https://p5js.org/reference/
     - line()
     - point()
     - rect()
+    - stroke() 第二个参数为透明度 0～255！！
     - quad(): 四角形
     - triangle()
     - strokeJoin(MITER / BEVEL / ROUND): 连线风格
@@ -78,7 +79,7 @@ you can check out all the reference here : https://p5js.org/reference/
     - exp(): 返回欧拉数
     - log(): 自然对数
     - mag(): 计算向量大小
-    - map(): 从一个范围映射一个数字到另一个范围
+    - map(): 从一个范围映射一个数字到另一个范围, 第四个参数为可否越界
     - norm(): 将一个数字标准化成一个介于 0 到 1 间的值
 
 11. Typography
