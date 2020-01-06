@@ -2,7 +2,7 @@
 step = 8
 rate = 0
 preload=_=> {
-    bg = loadImage('http://localhost:5500/P5js/sources/dylan.jpg')
+    bg = loadImage('http://localhost:5500/sources/dylan.jpg')
 }
 setup=draw=_=>{
     createCanvas(500,500)

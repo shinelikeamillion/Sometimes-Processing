@@ -34,7 +34,7 @@ let img;
 let cavs;
 let imgSize;
 function preload(){
-  img = loadImage('http://localhost:5500/P5js/sources/dylan.jpg')
+  img = loadImage('http://localhost:5500/sources/dylan.jpg')
 }
 
 function setup() {

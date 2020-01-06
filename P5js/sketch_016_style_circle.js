@@ -33,7 +33,7 @@ let img;
 let nums;
 let cavs;
 function preload(){
-  img = loadImage('http://localhost:5500/P5js/sources/lou.jpg')
+  img = loadImage('http://localhost:5500/sources/lou.jpg')
 }
 
 function setup() {

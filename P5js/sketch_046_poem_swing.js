@@ -22,7 +22,7 @@ setup = _ => {
     // noLoop()
     capture = new CCapture({
         format: 'gif',
-        workersPath: '../node_modules/ccapture.js/src/',
+        workersPath: 'ccapture.js/src/',
         verbose: true,
         framerate: 60
     })
