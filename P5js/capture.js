@@ -1,5 +1,4 @@
 
-
 class Capture {
     constructor(p5, frameN) {
         this.p5 = p5
