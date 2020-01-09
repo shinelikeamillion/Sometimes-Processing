@@ -5,7 +5,9 @@ you can check out all the reference here : https://p5js.org/reference/
     - colorMode(RGB / HSB / HSL): 红绿蓝/色调饱和度/亮度（光度）
     - lightness(): 提取颜色的光度值
     - saturation(): 提取饱和度值
-    - hue()
+    - hue(): 提取色调值
+
+    - erase()/noErase(): 从画布上减去正绘制的图形
 
 2. Shape
     - arc(): 圆弧
@@ -16,8 +18,17 @@ you can check out all the reference here : https://p5js.org/reference/
     - stroke() 第二个参数为透明度 0～255！！
     - quad(): 四角形
     - triangle()
-    - strokeJoin(MITER / BEVEL / ROUND): 连线风格
+    - strokeJoin(MITER 尖/ BEVEL 斜/ ROUND 圆): 连线风格
     - begin/endShape() + vertex()： 更复杂的图形
+    - strokeCap(): 线条顶点风格 ROUND圆/SQUARE直/PROJECT
+
+2. 3D 形状
+    - plane() 平面
+    - sphere() 用给予的半径画一个球形
+    - torus() 一个圆环
+    - cone() 圆锥
+    - cylinder() 圆柱
+
 
 3. Constants
     - HALF_PI / PI / QUARTER_PI/ TWO_PI
@@ -70,17 +81,21 @@ you can check out all the reference here : https://p5js.org/reference/
     - constrain(): 限制取值区间
     - dist(): 距离
     - noise(): 噪音函数
-    - acos() / asin() / atan() ? 
+    - acos() / asin() / atan() 求该值的翻 正/余/真切值
     - cos() / sin() / tan(): 三角函数
     - atan2(): 屏蔽掉负数情况的正切函数
-    - degrees():将弧度转换成角度值
-    - radians(): 将角度值转换成对应的弧度值
+    - degrees():将弧度转换成角度值 PI -> 180‘
+    - radians(): 将角度值转换成对应的弧度值 360‘ -> TWO_PI
     - angleMode(): 角度模式
     - exp(): 返回欧拉数
     - log(): 自然对数
     - mag(): 计算向量大小
+    - sq(): 平方一个数字
     - map(): 从一个范围映射一个数字到另一个范围, 第四个参数为可否越界
-    - norm(): 将一个数字标准化成一个介于 0 到 1 间的值
+    - norm(): 将一个数字标准化成一个介于 0 到 1 间的值, 范围外的值有用处
+
+    - randomSeed(): 使用随机种子，是每次执行生成相同伪随机结果 seam as noiseSeed()
+    - randomGaussian(): 返回一个符合高斯，或正态，分布的随机数
 
 11. Typography
 
