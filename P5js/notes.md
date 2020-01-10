@@ -102,3 +102,10 @@ you can check out all the reference here : https://p5js.org/reference/
 12. Lights, Camera
 
 13. p5.Shader
+
+
+### 记录一些 javascript 注意事项
+1. 10 == ”10“; 1 == ""; 都返回 true, 常规比较中类型会被忽略
+2. 所有浮点数都是以 64 位存储，精度很难确定；可以使用整除法解决
+    （x * 10 + y * 10） / 10
+3. 使用 \ 连接换行字符
