@@ -5,22 +5,21 @@ var max_distance;
 var toogleRectOrEllipse;
 
 function setup() {
-    createCanvas(400, 400);
+    createCanvas(300, 300);
     smooth();
     noStroke();
     max_distance = dist(0, 0, width, height);
     rectMode(CENTER);
-    fill(0);
 }
 
 function draw() {
-    background(255);
-
-    for(var i = 0; i <= width; i += 20) {
-        for(var j = 0; j <= width; j += 20) {
+    background(0);
+    gap = width / 10;
+    for (var i = 0; i <= width; i += gap) {
+        for (var j = 0; j <= width; j += gap) {
             var size = dist(mouseX, mouseY, i, j);
-            size = 25 - size / max_distance * 25;
-            if(toogleRectOrEllipse) {
+            size = map(size, 0, width, 0, gap * 2)
+            if (toogleRectOrEllipse) {
                 rect(i, j, size, size);
             } else {
                 ellipse(i, j, size, size);

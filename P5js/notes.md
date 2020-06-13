@@ -109,3 +109,4 @@ you can check out all the reference here : https://p5js.org/reference/
 2. 所有浮点数都是以 64 位存储，精度很难确定；可以使用整除法解决
     （x * 10 + y * 10） / 10
 3. 使用 \ 连接换行字符
+4. 你用 2D perlin noise 中选取圆圈可以实现 loop 效果

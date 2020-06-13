@@ -21,19 +21,19 @@ function setup() {
 
   colorMode(RGB);
 
-  cFrom = color(234,67,53);
-  cTo = color(66,133,244);
-  halfWidth = windowWidth/2;
-  space = maxSize/4;
+  cFrom = color(234, 67, 53);
+  cTo = color(66, 133, 244);
+  halfWidth = windowWidth / 2;
+  space = maxSize / 4;
 }
 
 function draw() {
 
-  for(var i = 10; i < maxSize; i+=10) {
+  for (var i = 10; i < maxSize; i += 10) {
     var c = map(cos(map(i, 10, 190, -TWO_PI, 0) - off), -1, 1, 0, 1);
     stroke(lerpColor(cFrom, cTo, c));
-    ellipse(halfWidth - space, height/2, i, i);
-    ellipse(halfWidth + space, height/2, i, i);
+    ellipse(halfWidth - space, height / 2, i, i);
+    ellipse(halfWidth + space, height / 2, i, i);
   }
   off += 0.02;
 }

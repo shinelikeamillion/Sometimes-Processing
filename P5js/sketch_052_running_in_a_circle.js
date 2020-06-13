@@ -11,14 +11,14 @@ draw = _ => {
     background(0)
     translate(width / 2, height / 2)
 
-    if (frameCount % 2 == 0) {
-        stroke(255)
-        ellipse(0, 0, width/2)
-    }
-    t = floor(frameCount % 360)*2
+    // if (frameCount % 2 == 0) {
+    //     stroke(255)
+    //     ellipse(0, 0, width/2)
+    // }
+    t = floor(frameCount % 360)
     for (let i = 0; i < 1; i++) {
         start = t + i * 30
-        end = t + 180 + i * 30
+        end = start + 180
 
         stroke(color(255, 40, 100))
         beginShape()

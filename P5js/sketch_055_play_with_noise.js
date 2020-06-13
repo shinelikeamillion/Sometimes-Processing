@@ -17,8 +17,8 @@ draw = _ => {
             noiseV = noise((mouseX + j) * noiseS,
                 (mouseY + i) * noiseS)
 
-            x = margin + i * (size + gap) + (size + gap) / 2
-            y = margin + j * (size + gap) + (size + gap) / 2
+            y = margin + i * (size + gap) + (size + gap) / 2
+            x = margin + j * (size + gap) + (size + gap) / 2
 
             fill(255 * noiseV)
             rect(x, y, size, size)

@@ -4,3 +4,5 @@
 capture resize 图片
 
 running in a circle 改成球形
+
+噪音函数 + 表盘指针

@@ -15,7 +15,7 @@ draw = _ => {
     background(255)
     translate(width / 2, height / 2)
     for (let r = step; r < width / 2; r += 4) {
-        off = TWO_PI / (pow(floor(r / step/2), 2) + 20)
+        off = 1 / (r/2)
         beginShape()
         for (let a = 0; a <= TWO_PI ; a += off) {
             // 保证闭合
