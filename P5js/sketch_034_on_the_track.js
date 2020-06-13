@@ -8,12 +8,12 @@ setup = _ => {
     noFill()
     stroke(255)
     strokeWeight(5)
-    capture = new CCapture({
-        format: 'gif',
-        workersPath: 'ccapture.js/src/',
-        verbose: true,
-        framerate: 60
-    })
+    // capture = new CCapture({
+    //     format: 'gif',
+    //     workersPath: 'ccapture.js/src/',
+    //     verbose: true,
+    //     framerate: 60
+    // })
     // noLoop()
     // frameRate(5)
 }
@@ -34,14 +34,14 @@ draw = _ => {
         }
     }
 
-    if (count > 0) {
-        capture.capture(document.getElementById('defaultCanvas0'))
-    }
-    if (count > 0 && frameCount - count >= 40*PI) {
-        noLoop()
-        capture.stop()
-        capture.save()
-    }
+    // if (count > 0) {
+    //     capture.capture(document.getElementById('defaultCanvas0'))
+    // }
+    // if (count > 0 && frameCount - count >= 40 * PI) {
+    //     noLoop()
+    //     capture.stop()
+    //     capture.save()
+    // }
 }
 
 keyPressed = _ => {
