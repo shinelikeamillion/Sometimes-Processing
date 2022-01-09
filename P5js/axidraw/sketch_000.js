@@ -48,9 +48,7 @@ function setup() {
 // todo 区域内平均色值； 动态大小
 function draw() {
   background(mouseIsPressed?255:175);
-  // testColorPicker()
-  // test
-  // style3.show(width/2, height/2)
+  rectMode(CENTER)
   for(i = 0; i < nums; i++){
     let y = i * (size + gap) + size/2 + padding
     let iy = parseInt(map(y, 0, height, 0, img.height))
@@ -59,14 +57,13 @@ function draw() {
       let ix = parseInt(map(x, 0, width,0, img.width))
       let index = (ix + iy * img.width) * 4
       let level = brightness(getColor(img, index))
-      // style1.color = map(level, 0, 100, 0, 255)
-      stroke(level)
-      if(level < 10) 
-        style3.show(x, y)
-      else if(level < 60)
-        style2.show(x, y)
-      else if(level < 101)
-        style1.show(x, y)
+      iHight = map(level, 0, 100, 10, 1)
+      fill(level)
+      push()
+      translate(x, y);
+      rotate(-PI/4.0)
+      rect(0, 0, 20, iHight)
+      pop()
     }
   }
 }

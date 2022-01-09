@@ -1,20 +1,19 @@
 
 let Paper = {
-  A4: [595, 842],
-  A3: [794, 1123],
+  A4: [2480, 3508],
+  A3: [842, 1191],
 }
-let landscape = false;
 
 let img;
 let nums;
 let cavs;
 function preload(){
-  img = loadImage('http://localhost:5500/sources/lou.jpg')
+  img = loadImage('http://localhost:5500/sources/jin1.jpg')
 }
 
 let lines = [];
-function setup() {
-  let [width, height] = landscape ? Paper.A3.reverse() : Paper.A3;
+setup = _ => {
+  let [width, height] = Paper.A3
   cavs = createCanvas(width, height, SVG)
 	strokeWeight(.6)
   smooth(8)
@@ -22,7 +21,7 @@ function setup() {
   noLoop();
   img.loadPixels()
 
-  let maxImgW = width > height ? (landscape ? width: height) : (landscape ? height: width);
+  let maxImgW = width > height ? width : height;
   for(y = 0; y < height; y+=(stepY+gapY)){
     var m = true;
     let iy = parseInt(map(y, 0, maxImgW, 0, img.height))
@@ -36,7 +35,7 @@ function setup() {
         let ix = parseInt(map(x, 0, width,0, img.width))
         let index = (ix + iy * img.width) * 4
         let level = brightness(getColor(img, index))
-        stepX = map(level, 0, 100, 2, 3)
+        stepX = map(level, 0, 100, 1, 3)
         x += stepX;
         m = !m;
     }
@@ -47,12 +46,12 @@ function setup() {
 // todo 区域内平均色值； 动态大小
 // 连续曲线
 var stepX = 5;
-var stepY = 30;
+var stepY = 20;
 var gapY = 2;
 function draw() {
   background(mouseIsPressed?255:250);
   
-  // console.log(JSON.stringify(lines));
+  console.log(JSON.stringify(lines));
   lines.forEach(line => {
     beginShape()
     line.forEach((v) => {
@@ -61,7 +60,6 @@ function draw() {
     })
     endShape()
   })
-  // rect(0, 0, width, height)
 }
 
 function getColor(img, index){
@@ -72,11 +70,8 @@ function getColor(img, index){
     )
 }
 
-function mousePressed(){
+function keyPressed(){
   // saveCanvas(cavs, 'final', 'jpg')
-  // save('final.svg')
+  if(key === 's') save('final.svg')
 }
 
-// toggle plot: axicli --mode toggle
-// disable xy, xicli -m manual -M disable_xy 
-// axicli -m manual -M walk_x --walk_dist 1.5

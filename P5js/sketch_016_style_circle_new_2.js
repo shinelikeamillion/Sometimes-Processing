@@ -23,20 +23,23 @@ function setup() {
   img.loadPixels()
 
   let maxImgW = width > height ? (landscape ? width: height) : (landscape ? height: width);
-  for(y = 0; y < height; y+=(stepY+gapY)){
+  for(y = stepY/2; y < height; y+=(stepY+gapY)){
     var m = true;
     let iy = parseInt(map(y, 0, maxImgW, 0, img.height))
 
     let line = [];
+    let tempY = 0;
     for(x = 0; x < width-stepX;) {
 
-        let startY = m ? y : y+stepY;
+        let startY = y + (tempY*(m?-1:1));
         line.push([x.toFixed(3), startY])
         
         let ix = parseInt(map(x, 0, width,0, img.width))
         let index = (ix + iy * img.width) * 4
         let level = brightness(getColor(img, index))
         stepX = map(level, 0, 100, 2, 3)
+        tempY = map(level, 0, 100, -15, 0)
+        if(tempY >-2) tempY = 0;
         x += stepX;
         m = !m;
     }

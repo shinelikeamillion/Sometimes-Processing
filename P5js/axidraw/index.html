@@ -4,10 +4,21 @@
     <meta charset="UTF-8" />
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script src="../libraries/p5.js"></script>
-    <!-- <script type="text/javascript" src="https://github.com/zenozeng/p5.js-svg/releases/download/v0.5.2/p5.svg.js"></script> -->
+    <script src="https://unpkg.com/p5.js-svg@1.1.1"></script>
   </head>
 
-  <body></body>
+  <body>
+    <button id='btn_save'>save</button>
+  </body>
 
-  <script src="../sketch_016_style_circle_new.js"></script>
+  <script src="sketch_000.js"></script>
+  <script>
+    window.onload = (event) => {
+      var canvas = document.getElementById('btn_save');
+      canvas.onclick = _ => {
+        var temp = Math.floor(Math.random() * 100);
+        save('axidraw_sketch_'+temp+'.svg');
+      };
+    };
+  </script>
 </html>
