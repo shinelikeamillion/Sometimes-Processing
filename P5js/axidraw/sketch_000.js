@@ -1,68 +1,57 @@
 let size = 16
-let padding = size/2
-let gap = size/10
-let canvasSize = 410
-
-let style1 = {
-  color:"#000000",
-  show:function(x, y){
-  	// stroke(this.color)
-		ellipse(x, y, size, size)
-  }
+let padding = 20
+let gap = size/5
+let platMode = false;
+let Paper = {
+  A3: [794, 1123],
+  A4: [595*2, 842*2],
+  A5: [559, 795],
 }
 
-let style2 = {
-  color:"#000000",
-  show:function(x, y){
-  	// stroke(this.color)
-		ellipse(x, y, size, size)
-		ellipse(x, y, 0.7*size, 0.7*size)
-  }
-}
-
-let style3 = {
-  color:"#000000",
-  show:function(x, y){
-  	// stroke(this.color)
-    ellipse(x, y, size, size)
-		ellipse(x, y,size/2 + 3, size/2 + 3)
-    ellipse(x, y, size/4+1, size/4+1)
-  }
-}
 let img;
-let nums;
 let cavs;
 function preload(){
-  img = loadImage('http://localhost:5500/sources/lou.jpg')
+  img = loadImage('http://localhost:5500/sources/2.png')
 }
 
+let maxWidth = 0;
 function setup() {
-  cavs = createCanvas(canvasSize, canvasSize)
-	strokeWeight(1.5)
+  let [width, height] = Paper.A4;
+  cavs = createCanvas(width, height, SVG)
   smooth(8)
   noFill()
   noLoop(); // preload img or img will not show
   img.loadPixels()
-  nums = (width - 2 * padding) / (size + gap)
+  rows = (height - 2 * padding) / (size + gap)
+  cols = (width - 2 * padding) / (size + gap)
 }
 // todo 区域内平均色值； 动态大小
 function draw() {
-  background(mouseIsPressed?255:175);
+  background(255);
   rectMode(CENTER)
-  for(i = 0; i < nums; i++){
-    let y = i * (size + gap) + size/2 + padding
+  for(i = 0; i < rows; i++){
+    let y = i * (size + gap) + padding
     let iy = parseInt(map(y, 0, height, 0, img.height))
-    for(j = 0; j < nums; j++) {
-      let x = j * (size + gap) + size/2 + padding
+    for(j = 0; j < cols; j++) {
+      let x = j * (size + gap) + padding
       let ix = parseInt(map(x, 0, width,0, img.width))
       let index = (ix + iy * img.width) * 4
       let level = brightness(getColor(img, index))
-      iHight = map(level, 0, 100, 10, 1)
+      iHight = map(level, 0, 100, 10, 0)
       fill(level)
       push()
       translate(x, y);
       rotate(-PI/4.0)
-      rect(0, 0, 20, iHight)
+      if(platMode){
+        if(iHight<3)line(0, 0, size+4, 0)
+        if(iHight>3){
+          for(let k = 0; k < iHight; k++){
+            line(0, k, size+4, k)
+          }
+        }
+      } else {
+        rect(0, 0, size+4, iHight)
+      }
       pop()
     }
   }
@@ -76,21 +65,6 @@ function getColor(img, index){
     )
 }
 
-// function testColorPicker() {
-//   image(img)
-  // var x = parseInt(map(mouseX, 0, width, 0, img.width))
-  // var y = parseInt(map(mouseY, 0, height, 0, img.height))
-  // let index = (x + y * img.width) * 4
-  // fill(getColor(img, index))
-  // ellipse(x, y, 20, 20)
-  // ellipse(mouseX, mouseY, 30, 30)
-
-  // if(mouseIsPressed){
-  //   println(x+"-"+y+"-"+index)
-  // }
-// }
-
 function mousePressed(){
   saveCanvas(cavs, 'final', 'jpg')
 }
-
