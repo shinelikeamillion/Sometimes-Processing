@@ -1,4 +1,4 @@
-let size = 12
+let size = 16
 let padding = 20
 let gap = size/5
 let platMode = false;
@@ -16,7 +16,7 @@ function preload(){
 
 let maxWidth = 0;
 function setup() {
-  let [width, height] = Paper.A3;
+  let [width, height] = Paper.A4;
   cavs = createCanvas(width, height, SVG)
   smooth(8)
   noFill()
@@ -28,26 +28,26 @@ function setup() {
 // todo 区域内平均色值； 动态大小
 function draw() {
   background(255);
-  rectMode(CENTER);
   for (i = 0; i < rows; i++) {
-    let y = i * (size + gap) + padding;
+    let y = i * (size + gap) + padding + size/2;
     let iy = parseInt(map(y, 0, height, 0, img.height));
     for (j = 0; j < cols; j++) {
-      let x = j * (size + gap) + padding;
+      let x = j * (size + gap) + padding + size/2;
       let ix = parseInt(map(x, 0, width, 0, img.width));
       let level = brightness(getColor(ix, iy, img));
       // let level = brightness(convolution(ix, iy, 2, img))
-      iHight = parseInt(map(level, 0, 100, 10, 0));
+      iHight = map(level, 0, 100, 10, 0);
       fill(level);
       push();
       translate(x, y);
       rotate(-PI / 4.0);
       if (platMode) {
         for (let k = 0; k < iHight; k++) {
-          line(-size / 2, 0, size + 4 - size / 2, k);
+          line(-size / 2, k, size + 4 - size / 2, k);
         }
       } else {
-        rect(size / 2, 0, size + 4, iHight);
+        rectMode(CENTER);
+        rect(0, 0, size + 4, iHight);
       }
       pop();
     }
@@ -89,5 +89,7 @@ function convolution(x, y, matrixsize, img) {
 }
 
 function mousePressed(){
+  platMode = !platMode;
+  redraw();
   // saveCanvas(cavs, 'final', 'jpg')
 }
