@@ -37,7 +37,7 @@ function draw() {
       let ix = parseInt(map(x, 0, width, 0, img.width));
       let level = brightness(getColor(ix, iy, img));
       // let level = brightness(convolution(ix, iy, 2, img))
-      iHight = map(level, 0, 100, 10, 0);
+      iHight = parseInt(map(level, 0, 100, 10, 0));
       fill(level);
       push();
       translate(x, y);
