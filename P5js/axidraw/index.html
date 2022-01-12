@@ -16,7 +16,7 @@
     window.onload = (event) => {
       var canvas = document.getElementById('btn_save');
       canvas.onclick = _ => {
-        var temp = Math.floor(Math.random() * 100);
+        var temp = Date.now();
         save('axidraw_sketch_'+temp+'.svg');
       };
     };

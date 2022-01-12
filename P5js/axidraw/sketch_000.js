@@ -1,53 +1,55 @@
-let size = 16
-let padding = 20
-let gap = size/5
+let size = 12;
+let padding = 40;
+let gap = size / 5;
 let platMode = false;
 let Paper = {
   A3: [794, 1123],
   A4: [595, 842],
   A5: [559, 795],
-}
+};
 
 let img;
 let cavs;
-function preload(){
-  img = loadImage('http://localhost:5500/sources/2.png')
+function preload() {
+  img = loadImage("http://localhost:5500/sources/2.png");
 }
 
 let maxWidth = 0;
 function setup() {
-  let [width, height] = Paper.A4;
-  cavs = createCanvas(width, height, SVG)
-  smooth(8)
-  noFill()
+  let [width, height] = Paper.A3;
+  cavs = createCanvas(width, height, SVG);
+  smooth(8);
+  noFill();
   noLoop(); // preload img or img will not show
-  img.loadPixels()
-  rows = (height - 2 * padding) / (size + gap)
-  cols = (width - 2 * padding) / (size + gap)
+  img.loadPixels();
+  rows = (height - 2 * padding) / (size + gap);
+  cols = (width - 2 * padding) / (size + gap);
 }
 // todo 区域内平均色值； 动态大小
 function draw() {
-  background(255);
+  // background(255);
   for (i = 0; i < rows; i++) {
-    let y = i * (size + gap) + padding + size/2;
+    let y = i * (size + gap) + padding + size / 2;
     let iy = parseInt(map(y, 0, height, 0, img.height));
     for (j = 0; j < cols; j++) {
-      let x = j * (size + gap) + padding + size/2;
+      let x = j * (size + gap) + padding + size / 2;
       let ix = parseInt(map(x, 0, width, 0, img.width));
       let level = brightness(getColor(ix, iy, img));
       // let level = brightness(convolution(ix, iy, 2, img))
-      iHight = map(level, 0, 100, 10, 0);
+      iHight = parseInt(map(level, 0, 100, 10, 0));
       fill(level);
       push();
       translate(x, y);
       rotate(-PI / 4.0);
       if (platMode) {
-        for (let k = 0; k < iHight; k++) {
-          line(-size / 2, k, size + 4 - size / 2, k);
-        }
+        // if (k < 2) line(-size / 2, 1, size + 4 - size / 2, 1);
+        // else
+          for (let k = 0; k < iHight; k++) {
+            line(-size / 2, k, size + 4 - size / 2, k);
+          }
       } else {
         rectMode(CENTER);
-        rect(0, 0, size + 4, iHight);
+        rect(0, 0, size + 4, iHight < 2 ? 1 : iHight);
       }
       pop();
     }
@@ -88,8 +90,8 @@ function convolution(x, y, matrixsize, img) {
   return color(rtotal, gtotal, btotal);
 }
 
-function mousePressed(){
-  platMode = !platMode;
-  redraw();
+function mousePressed() {
+  // platMode = !platMode;
+  // redraw();
   // saveCanvas(cavs, 'final', 'jpg')
 }
