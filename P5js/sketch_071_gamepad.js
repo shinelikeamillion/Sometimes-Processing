@@ -28,9 +28,9 @@ draw = (_) => {
 handleUpdate = (_) => {
   var gp = navigator.getGamepads()[0];
   if (gp) {
-    fixedW = (gp.axes[0]*1.0).toFixed(1);
+    fixedW = Math.round(gp.axes[0]*100)/100;
     // axes[1] < 0 is up
-    fixedH = (-gp.axes[1]*1.0).toFixed(1);
+    fixedH = Math.round(-gp.axes[1]*100)/100;
     // console.log(fixedH)
     if ((bw >= 0 && fixedW < 0) || (bw <= size && fixedW > 0))
       bw += fixedW * seed;
