@@ -1,66 +1,114 @@
-let size = 12;
-let padding = 40;
-let gap = size / 5;
-let platMode = false;
 let Paper = {
   A3: [794, 1123],
   A4: [595, 842],
   A5: [559, 795],
 };
 
+let lyrics = `
+I am a moonshiner
+For 17 long years
+And I spent all my money
+On whisky and beers
+
+And I go to some hollow
+And set up my still
+If whisky don't kill me
+Lord, I don't know what will
+
+And I go to some barroom
+To drink with my friends
+Where the women they can't follow
+To see what I spend
+
+God bless them, pretty women
+I wish they was mine
+With breath as sweet as
+The dew on the vine
+
+Let me eat when I'm hungry
+Let me drink when I'm dry
+Two dollars when I'm hard up
+Religion when I die
+
+The whole world is a bottle
+And life is but a dram
+When the bottle gets empty
+Lord, it sure ain't worth a damn`
+// .replace(/\s+|\n+$/g, '')
+.replace(/\s/g, '·')
+.replace(/\n+/g, '');
+
+let size = 6;
+let padding = 30;
+let gap = 1;
+let platMode = false;
+
 let img;
 let cavs;
+
 function preload() {
-  img = loadImage("http://localhost:5500/sources/2.png");
+  img = loadImage("http://localhost:5501/sources/3.png");
 }
 
 let maxWidth = 0;
-function setup() {
+setup = (_) => {
   let [width, height] = Paper.A3;
+  // cavs = createCanvas(width, height);
   cavs = createCanvas(width, height, SVG);
   smooth(8);
   noFill();
   noLoop(); // preload img or img will not show
   img.loadPixels();
-  rows = (height - 2 * padding) / (size + gap);
-  cols = (width - 2 * padding) / (size + gap);
-}
+  rows = parseInt((height - 2 * padding) / (size + gap+3));
+  cols = parseInt((width - 2 * padding) / (size + gap+1));
+  fill(0);
+  textAlign(CENTER);
+};
 // todo 区域内平均色值； 动态大小
-function draw() {
+var wi = 0;
+draw = (_) => {
   // background(255);
   for (i = 0; i < rows; i++) {
-    let y = i * (size + gap) + padding + size / 2;
+    let y = i * (size + gap+3) + padding + size / 2;
     let iy = parseInt(map(y, 0, height, 0, img.height));
     for (j = 0; j < cols; j++) {
-      let x = j * (size + gap) + padding + size / 2;
+      let x = j * (size + gap+1) + padding + size / 2;
       let ix = parseInt(map(x, 0, width, 0, img.width));
       let level = brightness(getColor(ix, iy, img));
       // let level = brightness(convolution(ix, iy, 2, img))
-      iHight = parseInt(map(level, 0, 100, 10, 0));
-      fill(level);
+      iHight = map(level, 0, 100, 12, 6);
+      // fill(level);
       push();
       translate(x, y);
-      rotate(-PI / 4.0);
+      // rotate(-PI / 4.0);
       if (platMode) {
-        // if (k < 2) line(-size / 2, 1, size + 4 - size / 2, 1);
-        // else
           for (let k = 0; k < iHight; k++) {
             line(-size / 2, k, size + 4 - size / 2, k);
           }
       } else {
-        rectMode(CENTER);
-        rect(0, 0, size + 4, iHight < 2 ? 1 : iHight);
+        if(iHight > 6.1) {
+          var w = lyrics[(parseInt((wi++) % lyrics.length))];
+          textSize(iHight)
+          if(iHight > 9)textStyle(BOLD)
+          else textStyle(NORMAL)
+          text(w, 0, 0);
+          // stroke(map(level, 0, 100, 0, 100))
+          // strokeWeight(iHight);
+          // point(0, 0);
+        } else {
+          // point(0, 0);
+        }
       }
       pop();
     }
   }
-}
+};
 
-function getColor(x, y, img) {
+getColor = (x, y, img) => {
   let index = (x + y * img.width) * 4;
   return color(img.pixels[index], img.pixels[index + 1], img.pixels[index + 2]);
-}
-function convolution(x, y, matrixsize, img) {
+};
+convolution = (x, y, matrixsize, img) => {
   var rtotal = 0.0;
   var gtotal = 0.0;
   var btotal = 0.0;
@@ -88,10 +136,9 @@ function convolution(x, y, matrixsize, img) {
   // Return the resulting color
 
   return color(rtotal, gtotal, btotal);
-}
+};
 
-function mousePressed() {
-  // platMode = !platMode;
-  // redraw();
-  // saveCanvas(cavs, 'final', 'jpg')
-}
+mousePressed = (_) => {
+  // drawLine = !drawLine;
+  noLoop();
+};
