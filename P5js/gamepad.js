@@ -37,16 +37,19 @@ const GP = {
   // 15
   DP_RIGHT: 0,
   // axes[0],axes[1]
-  LS: [0.0, 0.0],
+  RSLS: [0.0, 0.0],
   // axes[1],axes[2]
   RS: [0.0, 0.0],
   // 17
   Share: 0,
+  LR: 0,
+  RR: 0
 };
 
 function updateGamePad() {
   let gp = navigator.getGamepads()[0];
   if(!gp) return;
+  GP.connected = gp.connected;
   GP.id = gp.id;
   GP.index = gp.index;
   GP.mapping = gp.mapping;
@@ -70,4 +73,6 @@ function updateGamePad() {
   GP.LS = [gp.axes[0], gp.axes[1]];
   GP.RS = [gp.axes[2], gp.axes[3]];
   GP.Share = gp.buttons[17].value;
+  GP.LR = (Math.abs(GP.LS[1]) + Math.abs(GP.LS[0])) > 0.1 ? atan2(GP.LS[1], GP.LS[0]) : 0;
+  GP.RR = (Math.abs(GP.RS[1]) + Math.abs(GP.RS[0])) > 0.1 ? atan2(GP.RS[1], GP.RS[0]) : 0;
 }
