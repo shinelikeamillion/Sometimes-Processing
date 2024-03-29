@@ -1,4 +1,3 @@
-
 let size = 12;
 let padding = 40;
 let gap = size / 5;
@@ -8,6 +7,7 @@ let Paper = {
   A5: [559, 795],
 };
 
+var updatedSize = size;
 var updateR = 0;
 var interactive = true;
 
@@ -18,7 +18,7 @@ function preload() {
 
 let boxs = [];
 function setup() {
-  frameRate(4)
+  frameRate(4);
   updateR = -PI / 4;
   let [width, height] = Paper.A3;
   createCanvas(width, height);
@@ -47,18 +47,17 @@ function setup() {
     }
   }
 }
-
+let change = size + 4;
 function draw() {
-
-  if (interactive) updateGamePad();
-  
   background(255);
-  handleUpdate();
+  if (interactive) updateGamePad();
+  change += (GP.DP_UP ? 2 : 0) + (GP.DP_DOWN ? -2 : 0);
   boxs.forEach((box) => {
     push();
     translate(box.x, box.y);
+    updateR = GP.LR ? GP.LR : updateR;
     rotate(updateR);
-    rect(0, 0, updatedSize + 4, box.height);
+    rect(0, 0, change, box.height);
     pop();
   });
 }
@@ -98,7 +97,7 @@ function convolution(x, y, matrixsize, img) {
 }
 
 function mousePressed() {
-  noLoop()
+  noLoop();
   // platMode = !platMode;
   // redraw();
   // saveCanvas(cavs, 'final', 'jpg')
