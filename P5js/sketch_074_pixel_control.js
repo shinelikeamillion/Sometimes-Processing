@@ -39,9 +39,8 @@ function setup() {
 
       let box = {
         x: x,
-        y:
-        y,
-        level: (convolution(ix, iy, 2, img)),
+        y: y,
+        level: convolution(ix, iy, 2, img),
       };
       boxs.push(box);
     }
@@ -57,13 +56,15 @@ function draw() {
     change2 += (GP.DP_UP ? 2 : 0) + (GP.DP_DOWN ? -2 : 0);
 
     updateR = GP.LR ? GP.LR : updateR;
-  }else {noLoop()}
+  } else {
+    noLoop();
+  }
   boxs.forEach((box) => {
     push();
     translate(box.x, box.y);
     rotate(updateR);
     fill(box.level);
-    a2()
+    a2();
     // if (box.level > 90) {
     //   a();
     // } else if (box.level > 50) {
@@ -94,7 +95,7 @@ a1 = (_) => {
 a2 = (_) => {
   rect(-s, -s, s, s);
   rect(s, s, s, s);
-  rect(0+change1, 0+change2, s, s);
+  rect(0 + change1, 0 + change2, s, s);
   rect(-s, s, s, s);
   rect(s, -s, s, s);
 };
