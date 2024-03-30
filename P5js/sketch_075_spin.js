@@ -1,64 +1,84 @@
-let size = 12;
-let padding = 40;
-let gap = size / 5;
+let size = 80;
 let Paper = {
   A3: [794, 1123],
   A4: [595, 842],
   A5: [559, 795],
 };
+let padding = 20;
 
-var updatedSize = size;
 var updateR = 0;
 var interactive = true;
 
-let img;
-function preload() {
-  img = loadImage("./sources/2.png");
-}
+function preload() {}
 
 let boxs = [];
+let gap = 0;
 function setup() {
-  frameRate(4);
-  updateR = -PI / 4;
+  // noLoop();
+  gap = size * sin(QUARTER_PI)*2 - size;
+  // frameRate(10);
+  updateR = QUARTER_PI;
   let [width, height] = Paper.A3;
-  createCanvas(width, height);
+  createCanvas(width, width);
   noStroke();
   fill(0);
-  img.loadPixels();
-  rows = (height - 2 * padding) / (size + gap);
-  cols = (width - 2 * padding) / (size + gap);
   rectMode(CENTER);
-
-  for (i = 0; i < rows; i++) {
-    let y = i * (size + gap) + padding + size / 2;
-    let iy = parseInt(map(y, 0, height, 0, img.height));
-    for (j = 0; j < cols; j++) {
-      let x = j * (size + gap) + padding + size / 2;
-      let ix = parseInt(map(x, 0, width, 0, img.width));
-      let bright = brightness(convolution(ix, iy, 2, img));
+  rows = (height ) / (size + gap) + 2;
+  cols = (width) / (size + gap) + 2;
+  for (i = -1; i < rows; i++) {
+    let y = i * (size + gap) + size / 2;
+    for (j = -1; j < cols; j++) {
+      let x = j * (size + gap) + size / 2;
 
       let box = {
         x: x,
         y: y,
-        height: Math.round(map(bright, 0, 100, 10, 0) * 100) / 100,
       };
       boxs.push(box);
     }
   }
 }
-let change = size + 4;
+let swi = false;
+let bingo = false;
 function draw() {
-  background(255);
-  if (interactive) updateGamePad();
-  change += (GP.DP_UP ? 2 : 0) + (GP.DP_DOWN ? -2 : 0);
-  boxs.forEach((box) => {
-    push();
-    translate(box.x, box.y);
-    updateR = GP.LR ? GP.LR : updateR;
-    rotate(updateR);
-    rect(0, 0, change, box.height);
-    pop();
-  });
+  if (interactive) {
+    updateGamePad();
+  } else {
+    noLoop();
+  }
+
+    if(bingo) {
+      swi = !swi;
+      updateR = QUARTER_PI;
+    }
+    if(swi) {
+      background(255);
+      fill(0)
+      boxs.forEach((box) => {
+        push();
+        translate(box.x, box.y);
+        rotate(updateR);
+        rect(0,0, size, size);
+        pop();
+      });
+    } else {
+      background(0);
+      fill(255)
+      boxs.forEach((box) => {
+        push();
+        translate(box.x+size * sin(QUARTER_PI), box.y+size * sin(QUARTER_PI));
+        rotate(updateR);
+        rect(0,0, size, size);
+        pop();
+      });
+    }
+
+    if (interactive) {
+      updateR += 0.01;
+      updateR = round(updateR,2)
+    }
+    bingo = Math.abs(round(cos(updateR), 2)) == round(cos(QUARTER_PI), 2);
+    print(updateR)
 }
 
 function getColor(x, y, img) {
