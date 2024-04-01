@@ -1,5 +1,5 @@
 let limit = 40;
-let size = 20;
+let size = 40;
 let padding = 40;
 // let gap = size / 5;
 let gap = 0;
@@ -25,9 +25,12 @@ function setup() {
   createCanvas(width, height);
   // noLoop();
   img.loadPixels();
-  rows = (height - 2 * padding) / (size + gap);
-  cols = (width - 2 * padding) / (size + gap);
+  rows = parseInt((height - 2 * padding) / (size + gap));
+  cols = parseInt((width - 2 * padding) / (size + gap));
   rectMode(CENTER);
+
+  let rR = random([...Array(rows).keys()])
+  let rC = random([...Array(cols).keys()])
 
   for (i = 0; i < rows; i++) {
     let y = i * (size + gap) + padding + size / 2;
@@ -35,19 +38,28 @@ function setup() {
     for (j = 0; j < cols; j++) {
       let x = j * (size + gap) + padding + size / 2;
       let ix = parseInt(map(x, 0, width, 0, img.width));
-      let color = convolution(ix, iy, 2, img);
-      let level = brightness(color);
+      let c = convolution(ix, iy, 2, img);
+      let level = brightness(c);
 
+      let index = (i + rows * j) % 3 == 0 ? 2 : 1;
+
+      let picked = false;
+      if(i == rR && j == 1) {
+        index = index == 2 ? 1 : 2;
+        // c = color('red')
+        picked = true;
+      }
       let box = {
         // index: (i+j) % 3,
         // index: (i*j) % 3,
         // index: ((i+j)/2) % 3,
         // index: ((2*i*j)) % 3,
-        index: i == j ? 3 : i < j ? 2: 1,
+        index: index,
         x: x,
         y: y,
         level: round(map(level, 0, 100, size, 4), 2),
-        color: color,
+        color: c,
+        picked: picked
       };
       boxs.push(box);
     }
@@ -60,11 +72,11 @@ function draw() {
 
   if (GP.DP_UP && size < limit) size += 5;
   if (GP.DP_DOWN && size > 5) size -= 5;
-  if (GP.X&& strokeSize < limit- 2) strokeSize += 2;
+  if (GP.X && strokeSize < limit - 2) strokeSize += 2;
   if (GP.Y && strokeSize > 2) strokeSize -= 2;
 
   boxs.forEach((box) => {
-    if(GP.A) box.index = random([1,2,3])
+    if (GP.A) box.index = random([1, 2, 3]);
     push();
     translate(box.x, box.y);
     // updateR = GP.LR ? GP.LR : updateR;
@@ -76,18 +88,17 @@ function draw() {
 }
 
 function getShape(box) {
-  let color = box.color;
   let i = box.index;
   if (i == 2) {
     noStroke();
-    fill(color);
+    fill(box.color);
 
     rect(0, 0, strokeSize, size);
     rect(0, 0, size, strokeSize);
   } else {
     noFill();
     strokeCap(SQUARE);
-    stroke(color);
+    stroke(box.color);
     strokeWeight(strokeSize);
 
     if (i == 0) {
@@ -99,6 +110,12 @@ function getShape(box) {
       arc(size / 2, -size / 2, size, size, HALF_PI, PI);
       arc(-size / 2, size / 2, size, size, -HALF_PI, 0);
     }
+  }
+  if(box.picked) {
+    noFill();
+    strokeWeight(2);
+    stroke(color('red'))
+    rect(0,0,size,size)
   }
 }
 
@@ -141,5 +158,5 @@ function mousePressed() {
   noLoop();
   // platMode = !platMode;
   // redraw();
-  saveCanvas("final", "png");
+  // saveCanvas("final", "png");
 }
