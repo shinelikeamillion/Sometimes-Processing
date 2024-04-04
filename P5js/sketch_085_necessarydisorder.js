@@ -20,13 +20,7 @@ let t = 0;
 draw = (_) => {
   background(0);
 
-  t = map(
-    frameCount - 1 + ( shutterAngle) / samplesPerFrame,
-    0,
-    numFrames,
-    0,
-    1
-  );
+  t = map(frameCount - 1 + shutterAngle / samplesPerFrame, 0, numFrames, 0, 1);
   points.forEach((p) => {
     p.show();
   });
@@ -45,6 +39,9 @@ class Thing {
     stroke(255);
     strokeWeight(this.s);
     // point(this.x, this.y)
-    point(this.x+this.r*cos(TWO_PI*t+this.offset),this.y+this.r*sin(TWO_PI*t+this.offset));
+    point(
+      this.x + this.r * cos(TWO_PI * t + this.offset),
+      this.y + this.r * sin(TWO_PI * t + this.offset)
+    );
   }
 }
