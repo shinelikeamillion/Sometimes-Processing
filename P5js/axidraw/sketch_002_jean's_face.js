@@ -1,93 +1,65 @@
-let number = 36;
-let gap = 0;
+let size = 12;
+let padding = 40;
+let gap = size / 5;
+let platMode = false;
 let Paper = {
   A3: [794, 1123],
   A4: [595, 842],
   A5: [559, 795],
-  Ins: [794, 992],
 };
 
-var updateR = 0;
-var interactive = true;
-
 let img;
-let samplesPerFrame = 1;
-let numFrames = 20;
+let cavs;
 function preload() {
-  img = loadImage("./sources/2.png");
+  img = loadImage("http://localhost:5500/sources/2.png");
 }
 
-let boxs = [];
-
-let picked = [];
-var t = 0;
-let lolors = [];
-let maxLevel = 0;
+let maxWidth = 0;
 function setup() {
-  // frameRate(10);
   let [width, height] = Paper.A3;
-  createCanvas(width, height);
-  let size = Math.floor(width/number)
-let padding = (width - size*number) / 2;
-  // noLoop();
+  cavs = createCanvas(width, height, SVG);
+  smooth(8);
+  noFill();
+  noLoop(); // preload img or img will not show
   img.loadPixels();
-  rows = parseInt((height - 2 * padding) / (size + gap));
-  cols = parseInt((width - 2 * padding) / (size + gap));
-  rectMode(CENTER);
-  noStroke();
-
+  rows = (height - 2 * padding) / (size + gap);
+  cols = (width - 2 * padding) / (size + gap);
+}
+// todo 区域内平均色值； 动态大小
+function draw() {
+  // background(255);
   for (i = 0; i < rows; i++) {
     let y = i * (size + gap) + padding + size / 2;
     let iy = parseInt(map(y, 0, height, 0, img.height));
     for (j = 0; j < cols; j++) {
       let x = j * (size + gap) + padding + size / 2;
       let ix = parseInt(map(x, 0, width, 0, img.width));
-      let c = convolution(ix, iy, 2, img);
-      let level = brightness(c);
-      if (level > maxLevel) maxLevel = level;
-
-      let box = {
-        x: x,
-        y: y,
-        c: c,
-        level: level,
-      };
-      boxs.push(box);
+      let level = brightness(getColor(ix, iy, img));
+      // let level = brightness(convolution(ix, iy, 2, img))
+      iHight = parseInt(map(level, 0, 100, 10, 0));
+      fill(level);
+      push();
+      translate(x, y);
+      rotate(-PI / 4.0);
+      if (platMode) {
+        // if (k < 2) line(-size / 2, 1, size + 4 - size / 2, 1);
+        // else
+          for (let k = 0; k < iHight; k++) {
+            line(-size / 2, k, size + 4 - size / 2, k);
+          }
+      } else {
+        rectMode(CENTER);
+        rect(0, 0, size + 4, iHight < 2 ? 1 : iHight);
+      }
+      pop();
     }
   }
-}
-let strokeSize = size / 3;
-
-function draw() {
-  noLoop()
-  background(0);
-  // noFill()
-  rectMode(CENTER)
-  // strokeWeight(3)
-  boxs.forEach((box) => {
-    size = map(box.level, 0, 100, 10, 20)
-    r = box.c.levels[0]
-    g = box.c.levels[1]
-    b = box.c.levels[2]
-    push();
-      translate(box.x, box.y);
-      fill(color(r, 0, 0, 125));
-      rect(0, 0, size, size);
-      rotate(PI / 3);
-      fill(color(0, g, 0, 125));
-      rect(0, 0, size, size);
-      rotate(PI / 3);
-      fill(color(0, 0, b, 125));
-      rect(0, 0, size, size);
-    pop();
-  });
 }
 
 function getColor(x, y, img) {
   let index = (x + y * img.width) * 4;
   return color(img.pixels[index], img.pixels[index + 1], img.pixels[index + 2]);
 }
-
 function convolution(x, y, matrixsize, img) {
   var rtotal = 0.0;
   var gtotal = 0.0;
@@ -119,8 +91,7 @@ function convolution(x, y, matrixsize, img) {
 }
 
 function mousePressed() {
-  noLoop();
   // platMode = !platMode;
   // redraw();
-  // saveCanvas("final", "png");
+  // saveCanvas(cavs, 'final', 'jpg')
 }

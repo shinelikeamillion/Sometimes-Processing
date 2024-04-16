@@ -2,16 +2,17 @@ size = 6
 noiseS = 0.1
 gap = 2
 setup = _ => {
+
     createCanvas(500, 500)
     rectMode(CENTER)
-    stroke(255)
+    stroke(0)
     noFill()
     num = floor(width / (size + gap))
     margin = (width % (size + gap)) / 2
-
+    noLoop()
 }
 draw = _ => {
-    background(0)
+    // background(0)
     for (i = num / 4; i < num - num / 4; i++) {
         beginShape()
         for (j = num / 4; j < num - num / 4; j++) {

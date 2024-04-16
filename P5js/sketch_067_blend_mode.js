@@ -55,7 +55,7 @@ function drawTile(x, y, size, mode) {
 
     fill(0)
     textAlign(CENTER)
-    textSize(6);
+    textSize(10);
     text(mode, 0, 4 * offset);
     pop()
 }

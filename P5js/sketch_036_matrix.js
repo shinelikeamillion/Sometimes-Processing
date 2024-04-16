@@ -1,18 +1,19 @@
 branch = 1
 speed = 100
 setup=_=>{
-    createCanvas(500,500)
+    createCanvas(500,500, SVG)
     noFill()
-    stroke(255)
+    stroke(0)
     strokeWeight(5)
     // frameRate(5)
+    noLoop()
 }
 
 // 如果 arc 的 start 和 end 相等 则会绘制一个 ⭕️，会产生闪烁的 BUG
 // 这一组数据（1.5707914124462925, 1.5708012411435006）
 // - 1/1e2 使 start 和 end 不会相遇到那么小的范围
 draw=_=>{
-    background(50)
+    // background(50)
 
     for(let a = 50; a < height; a+=100){
         for(let b = 50; b < width; b+=100){
@@ -33,3 +34,10 @@ draw=_=>{
         }
     }
 }
+
+keyPressed=_=> {
+    if (key === "s") {
+      var temp = Date.now();
+      save("axidraw_sketch_" + temp + ".svg");
+    }
+  }

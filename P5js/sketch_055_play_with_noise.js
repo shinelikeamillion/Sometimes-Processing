@@ -13,7 +13,7 @@ draw = _ => {
     for (i = 0; i < num; i++) {
         for (j = 0; j < num; j++) {
             // 调整噪音函数生成噪音特征及细节度
-            noiseDetail(2, 0.9)
+            noiseDetail(2, 3)
             noiseV = noise((mouseX + j) * noiseS,
                 (mouseY + i) * noiseS)
 

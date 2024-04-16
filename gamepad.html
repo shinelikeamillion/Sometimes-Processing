@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+
+  <body>
+    <h2>Xbox Controller</h2>
+    <h3>test</h3>
+  </body>
+  <script>
+    var loop
+    connect = (evt) => {
+      gamepadAPI.turbo = true;
+      console.log("Gamepad connected.");
+      loop = setInterval(()=>{
+      gamepadAPI.controller = evt.gamepad;
+      // console.log(gamepadAPI.controller);
+      }, 100)
+    };
+    disconnect = (evt) => {
+      gamepadAPI.turbo = false;
+      delete gamepadAPI.controller;
+      console.log("Gamepad disconnected.");
+      clearInterval(loop)
+    };
+    const gamepadAPI = {
+      controller: {},
+      turbo: false,
+      connect,
+      disconnect,
+      update() {},
+      buttonPressed() {},
+      buttons: [],
+      buttonsCache: [],
+      buttonsStatus: [],
+      axesStatus: [],
+    };
+    window.addEventListener("gamepadconnected", gamepadAPI.connect);
+    window.addEventListener("gamepaddisconnected", gamepadAPI.disconnect);
+
+  </script>
+</html>

@@ -4,11 +4,11 @@ setup = _ => {
     createCanvas(300, 300)
     noFill()
     strokeWeight(2)
-    // noLoop()
+    noLoop()
 }
 
 draw = _ => {
-    background(0)
+    // background(0)
     translate(width / 2, height / 2)
 
     // if (frameCount % 2 == 0) {
@@ -43,6 +43,6 @@ draw = _ => {
     }
     if (frameCount % 2 == 1) {
         stroke(255)
-        ellipse(0, 0, width/2)
+        // ellipse(0, 0, width/2)
     }
 }

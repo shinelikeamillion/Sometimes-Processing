@@ -5,7 +5,7 @@ preload = _ => {
     bg = loadImage('http://localhost:5500/sources/lou.jpg')
 }
 setup = _ => {
-    createCanvas(500, 500)
+    createCanvas(500, 500,)
     noFill()
     stroke(color(255, 40, 100))
     noLoop()
@@ -14,8 +14,7 @@ setup = _ => {
 
 draw = _ => {
     // image(bg, 0, 0, 500, bg.height / rate)
-    translate(width / 2, height / 2)
-
+    translate(width / 2.0, height / 2.0)
 
     for (let r = step; r < width / 2; r += 4) {
 

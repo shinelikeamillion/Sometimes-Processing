@@ -1,5 +1,7 @@
-let number = 36;
-let gap = 0;
+let limit = 40;
+let size = 20;
+let padding = 40;
+let gap = size;
 let Paper = {
   A3: [794, 1123],
   A4: [595, 842],
@@ -7,6 +9,7 @@ let Paper = {
   Ins: [794, 992],
 };
 
+var updatedSize = size;
 var updateR = 0;
 var interactive = true;
 
@@ -21,20 +24,16 @@ let boxs = [];
 
 let picked = [];
 var t = 0;
-let lolors = [];
-let maxLevel = 0;
 function setup() {
   // frameRate(10);
   let [width, height] = Paper.A3;
-  createCanvas(width, height);
-  let size = Math.floor(width/number)
-let padding = (width - size*number) / 2;
+  createCanvas(width, height, WEBGL);
   // noLoop();
   img.loadPixels();
   rows = parseInt((height - 2 * padding) / (size + gap));
   cols = parseInt((width - 2 * padding) / (size + gap));
   rectMode(CENTER);
-  noStroke();
+  noStroke()
 
   for (i = 0; i < rows; i++) {
     let y = i * (size + gap) + padding + size / 2;
@@ -44,41 +43,33 @@ let padding = (width - size*number) / 2;
       let ix = parseInt(map(x, 0, width, 0, img.width));
       let c = convolution(ix, iy, 2, img);
       let level = brightness(c);
-      if (level > maxLevel) maxLevel = level;
 
       let box = {
-        x: x,
-        y: y,
-        c: c,
-        level: level,
+        x: x - width / 2,
+        y: y - height / 2,
+        // c:c,
+        level: map(level, 0, 100, 4, size+10),
       };
       boxs.push(box);
     }
   }
 }
 let strokeSize = size / 3;
-
 function draw() {
-  noLoop()
   background(0);
-  // noFill()
-  rectMode(CENTER)
-  // strokeWeight(3)
+
+  t = map((frameCount - 1) / samplesPerFrame, 0, numFrames, 0, 1);
   boxs.forEach((box) => {
-    size = map(box.level, 0, 100, 10, 20)
-    r = box.c.levels[0]
-    g = box.c.levels[1]
-    b = box.c.levels[2]
     push();
-      translate(box.x, box.y);
-      fill(color(r, 0, 0, 125));
-      rect(0, 0, size, size);
-      rotate(PI / 3);
-      fill(color(0, g, 0, 125));
-      rect(0, 0, size, size);
-      rotate(PI / 3);
-      fill(color(0, 0, b, 125));
-      rect(0, 0, size, size);
+    translate(box.x, box.y);
+    rect(0, 0, 3, box.level);
+    rect(0, 0, box.level, 3);
+      push();
+      translate(size, size);
+      rotate(PI/4)
+      rect(0, 0, 3, box.level);
+      rect(0, 0, box.level, 3);
+      pop();
     pop();
   });
 }
